@@ -172,13 +172,13 @@ Actions.
 
 ### El hallazgo
 
-De **556 ofertas tech únicas** relevadas, solo **152 (27%)** declaran un sueldo. Y de esas,
-apenas **27 (18%)** publican un monto utilizable: el resto repite valores de relleno
-(`11.111`, `2.222`, `1.323.233`, `1.244.145`) que no son bandas salariales de nadie.
+De cada 100 ofertas tech relevadas, unas **30 declaran un sueldo**. Y de esas, apenas **1 de cada
+5 publica un monto que se puede usar**: el resto repite valores de relleno (`11.111`, `2.222`,
+`1.323.233`) que no son la banda salarial de nadie.
 
 No es un problema de scraping: es cómo se publica el salario en Argentina. Por eso el reporte
-marca varios rubros como *muestra chica* o directamente `s/d` en vez de inventar una mediana
-que no se sostiene.
+marca varios rubros como *muestra chica* o directamente `s/d` en vez de inventar una mediana que
+no se sostiene. Los números exactos de cada corrida están en el reporte.
 
 ### Qué publica
 
