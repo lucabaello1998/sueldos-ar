@@ -106,6 +106,57 @@
           "n": 0
         }
       ]
+    },
+    {
+      "fecha": "2026-11-02",
+      "mediana_general": 1670000,
+      "rubros": [
+        {
+          "id": "backend",
+          "mediana": 3700000,
+          "n": 3
+        },
+        {
+          "id": "soporte",
+          "mediana": 1900000,
+          "n": 4
+        },
+        {
+          "id": "devops",
+          "mediana": 1520000,
+          "n": 4
+        },
+        {
+          "id": "datos",
+          "mediana": 1500000,
+          "n": 7
+        },
+        {
+          "id": "qa",
+          "mediana": 1450000,
+          "n": 6
+        },
+        {
+          "id": "funcional",
+          "mediana": 1250000,
+          "n": 8
+        },
+        {
+          "id": "desarrollo",
+          "mediana": null,
+          "n": 1
+        },
+        {
+          "id": "frontend",
+          "mediana": null,
+          "n": 0
+        },
+        {
+          "id": "full-stack",
+          "mediana": null,
+          "n": 0
+        }
+      ]
     }
   ]
 }

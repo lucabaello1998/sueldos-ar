@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 320" role="img" aria-label="Evolución de la mediana salarial" class="grafico">
+<text x="0" y="14" class="eje-titulo">Evolución de la mediana por rubro</text>
+<line x1="20" y1="274" x2="810" y2="274" stroke="#334155" stroke-width="1"></line>
+<path d="M415.0,180.2 L810.0,274.0" fill="none" stroke="#5eead4" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"></path>
+<circle cx="415.0" cy="180.2" r="4" fill="#5eead4"></circle>
+<circle cx="810.0" cy="274.0" r="4" fill="#5eead4"></circle>
+<text x="814" y="44" class="leyenda" fill="#5eead4">funcional</text>
+<path d="M415.0,236.5 L810.0,180.2" fill="none" stroke="#fbbf24" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"></path>
+<circle cx="415.0" cy="236.5" r="4" fill="#fbbf24"></circle>
+<circle cx="810.0" cy="180.2" r="4" fill="#fbbf24"></circle>
+<text x="814" y="62" class="leyenda" fill="#fbbf24">datos</text>
+<path d="M415.0,105.1 L810.0,198.9" fill="none" stroke="#f472b6" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"></path>
+<circle cx="415.0" cy="105.1" r="4" fill="#f472b6"></circle>
+<circle cx="810.0" cy="198.9" r="4" fill="#f472b6"></circle>
+<text x="814" y="80" class="leyenda" fill="#f472b6">qa</text>
+<path d="M415.0,30.0 L810.0,30.0" fill="none" stroke="#93c5fd" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"></path>
+<circle cx="415.0" cy="30.0" r="4" fill="#93c5fd"></circle>
+<circle cx="810.0" cy="30.0" r="4" fill="#93c5fd"></circle>
+<text x="814" y="98" class="leyenda" fill="#93c5fd">soporte</text>
+<text x="20.0" y="298" class="etiqueta-fecha" text-anchor="middle">2026-10-30</text>
+<text x="415.0" y="298" class="etiqueta-fecha" text-anchor="middle">2026-10-31</text>
+<text x="810.0" y="298" class="etiqueta-fecha" text-anchor="middle">2026-11-02</text>
+<text x="0" y="34.0" class="etiqueta-n">$ 1,90 M</text>
+</svg>
