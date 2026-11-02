@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>sueldos-ar · motor de liquidación</title>
+  <meta name="description" content="Calculadora de liquidación de sueldos argentina: SAC, vacaciones, aportes, ganancias e indemnizaciones. Motor .NET 8 con tests." />
+  <link rel="stylesheet" href="estilos.css" />
+</head>
+<body>
+  <header class="top">
+    <div class="marca">
+      <span class="logo" aria-hidden="true">$</span>
+      <div>
+        <h1>sueldos-ar</h1>
+        <p class="bajada">Motor de liquidación argentino · .NET 8 + xUnit</p>
+      </div>
+    </div>
+    <div class="parametros" id="parametros-badge" title="Juego de parámetros cargado">
+      <span class="punto"></span>
+      <span id="parametros-texto">cargando parámetros…</span>
+    </div>
+  </header>
+
+  <nav class="tabs" role="tablist">
+    <button role="tab" class="tab activo" data-panel="sueldo" aria-selected="true">Sueldo de bolsillo</button>
+    <button role="tab" class="tab" data-panel="sac" aria-selected="false">SAC</button>
+    <button role="tab" class="tab" data-panel="vacaciones" aria-selected="false">Vacaciones</button>
+    <button role="tab" class="tab" data-panel="indemnizacion" aria-selected="false">Indemnización</button>
+  </nav>
+
+  <main>
+    <!-- ============ SUELDO ============ -->
+    <section class="panel activo" id="panel-sueldo">
+      <form class="formulario" id="form-sueldo" autocomplete="off">
+        <h2>Datos del mes</h2>
+
+        <label>Nombre
+          <input type="text" name="nombre" value="Luca Baello" />
+        </label>
+
+        <div class="fila">
+          <label>Sueldo básico
+            <input type="number" name="sueldoBasico" value="1500000" min="0" step="1000" required />
+          </label>
+          <label>Período
+            <select name="periodo" id="periodo">
+              <option value="2026-03" selected>marzo 2026</option>
+              <option value="2026-06">junio 2026</option>
+              <option value="2026-12">diciembre 2026</option>
+              <option value="2025-12">diciembre 2025</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="fila">
+          <label>Fecha de ingreso
+            <input type="date" name="fechaIngreso" value="2018-04-01" required />
+          </label>
+          <label>Edad
+            <input type="number" name="edad" value="28" min="18" max="99" />
+          </label>
+        </div>
+
+        <div class="fila">
+          <label>Días trabajados
+            <input type="number" name="diasTrabajados" placeholder="todos" min="0" max="31" />
+          </label>
+          <label>Horas extras al 50%
+            <input type="number" name="horasExtrasAl50" value="0" min="0" step="0.5" />
+          </label>
+        </div>
+
+        <div class="fila">
+          <label>Horas extras al 100%
+            <input type="number" name="horasExtrasAl100" value="0" min="0" step="0.5" />
+          </label>
+          <label>Otras deducciones
+            <input type="number" name="otrasDeducciones" value="0" min="0" step="1000" />
+          </label>
+        </div>
+
+        <div class="checks">
+          <label class="check"><input type="checkbox" name="afiliadoSindicato" /> Afiliado al sindicato (2%)</label>
+          <label class="check"><input type="checkbox" name="zonaDesfavorable" /> Zona desfavorable (22%)</label>
+        </div>
+
+        <button type="submit" class="principal">Calcular recibo</button>
+      </form>
+
+      <div class="resultado" id="resultado-sueldo">
+        <p class="vacio">Completá los datos y tocá <strong>Calcular recibo</strong>.</p>
+      </div>
+    </section>
+
+    <!-- ============ SAC ============ -->
+    <section class="panel" id="panel-sac">
+      <form class="formulario" id="form-sac" autocomplete="off">
+        <h2>SAC del semestre</h2>
+        <p class="ayuda">50% de la mejor remuneración del semestre, proporcional a los días trabajados.</p>
+
+        <div class="fila">
+          <label>Mejor remuneración del semestre
+            <input type="number" name="mejor" value="1800000" min="0" step="1000" required />
+          </label>
+          <label>Período de pago
+            <select name="periodo">
+              <option value="2026-06" selected>junio 2026 (enero–junio)</option>
+              <option value="2026-12">diciembre 2026 (julio–diciembre)</option>
+            </select>
+          </label>
+        </div>
+
+        <label>Días trabajados en el semestre
+          <input type="number" name="dias" value="181" min="0" max="184" />
+        </label>
+
+        <button type="submit" class="principal">Calcular SAC</button>
+      </form>
+      <div class="resultado" id="resultado-sac">
+        <p class="vacio">Cargá la mejor remuneración del semestre.</p>
+      </div>
+    </section>
+
+    <!-- ============ VACACIONES ============ -->
+    <section class="panel" id="panel-vacaciones">
+      <form class="formulario" id="form-vacaciones" autocomplete="off">
+        <h2>Vacaciones</h2>
+        <p class="ayuda">Días corridos según antigüedad al 31/12 del año anterior, pagados sobre el sueldo dividido 25.</p>
+
+        <div class="fila">
+          <label>Fecha de ingreso
+            <input type="date" name="fechaIngreso" value="2018-04-01" required />
+          </label>
+          <label>Año de las vacaciones
+            <input type="number" name="anio" value="2026" min="2000" max="2100" />
+          </label>
+        </div>
+
+        <div class="fila">
+          <label>Sueldo bruto mensual
+            <input type="number" name="sueldoBasico" value="1500000" min="0" step="1000" required />
+          </label>
+          <label>Días a tomar
+            <input type="number" name="diasTomados" placeholder="todos" min="0" max="35" />
+          </label>
+        </div>
+
+        <button type="submit" class="principal">Calcular vacaciones</button>
+      </form>
+      <div class="resultado" id="resultado-vacaciones">
+        <p class="vacio">Indicá el ingreso y el sueldo bruto.</p>
+      </div>
+    </section>
+
+    <!-- ============ INDEMNIZACIÓN ============ -->
+    <section class="panel" id="panel-indemnizacion">
+      <form class="formulario" id="form-indemnizacion" autocomplete="off">
+        <h2>Despido sin justa causa</h2>
+        <p class="ayuda">Arts. 232, 233, 245 y 123 LCT: antigüedad, preaviso, integración del mes y SAC proporcional.</p>
+
+        <div class="fila">
+          <label>Fecha de ingreso
+            <input type="date" name="fechaIngreso" value="2018-04-01" required />
+          </label>
+          <label>Fecha de despido
+            <input type="date" name="fechaDespido" value="2026-03-15" required />
+          </label>
+        </div>
+
+        <div class="fila">
+          <label>Sueldo básico
+            <input type="number" name="sueldoBasico" value="1500000" min="0" step="1000" required />
+          </label>
+          <label>Mejor remuneración (opcional)
+            <input type="number" name="mejorRemuneracion" placeholder="usa el básico" min="0" step="1000" />
+          </label>
+        </div>
+
+        <button type="submit" class="principal">Calcular indemnización</button>
+      </form>
+      <div class="resultado" id="resultado-indemnizacion">
+        <p class="vacio">Completá las fechas y el sueldo.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>
+      Motor de cálculo con parámetros en JSON (<span id="pie-parametros">—</span>).
+      Es una herramienta técnica de demostración: antes de usarla para liquidar de verdad, verificá la escala
+      y los topes vigentes en <a href="https://www.arca.gob.ar/" target="_blank" rel="noopener">ARCA</a>.
+    </p>
+    <p class="firma">
+      <a href="https://github.com/lucabaello1998/sueldos-ar" target="_blank" rel="noopener">Código en GitHub</a>
+      · 61 tests xUnit · <span id="version">v1.0.0</span>
+    </p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+extend-exclude = [".git", "docs", "bin", "obj"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+ignore = ["E501"]
+
+[tool.ruff.lint.per-file-ignores]
+"tools/observatorio/tests/*" = ["B011"]
+
+[tool.pytest.ini_options]
+testpaths = ["tools/observatorio/tests"]
+pythonpath = ["."]

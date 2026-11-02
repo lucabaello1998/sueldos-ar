@@ -1,0 +1,407 @@
+{
+  "data": [
+    {
+      "field": {
+        "id": "447.1_TOTALTAL_0_0_5_37",
+        "description": "Índice de salarios total",
+        "title": "total",
+        "frequency": "R/P1D",
+        "time_index_start": "2016-11-01",
+        "time_index_end": "2021-02-28",
+        "units": "31-oct-16=100",
+        "hits_90_days": "0"
+      },
+      "dataset": {
+        "title": "Coeficiente de Variación Salarial (CVS)",
+        "publisher": {
+          "name": "Subsecretaría de Programación Macroeconómica"
+        },
+        "source": "Instituto Nacional de Estadística y Censos (INDEC)",
+        "theme": "Dinero y Bancos"
+      }
+    },
+    {
+      "field": {
+        "id": "149.1_TL_INDIIOS_OCTU_0_21",
+        "description": "Índice de Salarios",
+        "title": "indice_salarios",
+        "frequency": "R/P1M",
+        "time_index_start": "2016-10-01",
+        "time_index_end": "2026-07-01",
+        "units": "Índice",
+        "hits_90_days": "0"
+      },
+      "dataset": {
+        "title": "Índice de salarios. Base octubre 2016",
+        "publisher": {
+          "name": "Subsecretaría de Programación Macroeconómica"
+        },
+        "source": "Instituto Nacional de Estadística y Censos (INDEC)",
+        "theme": "Empleo e Ingresos"
+      }
+    },
+    {
+      "field": {
+        "id": "149.1_TL_REGIADO_OCTU_0_16",
+        "description": "Índice de Salarios. Empleo registrado.",
+        "title": "indice_salarios_registrado",
+        "frequency": "R/P1M",
+        "time_index_start": "2015-10-01",
+        "time_index_end": "2026-07-01",
+        "units": "Índice",
+        "hits_90_days": "0"
+      },
+      "dataset": {
+        "title": "Índice de salarios. Base octubre 2016",
+        "publisher": {
+          "name": "Subsecretaría de Programación Macroeconómica"
+        },
+        "source": "Instituto Nacional de Estadística y Censos (INDEC)",
+        "theme": "Empleo e Ingresos"
+      }
+    },
+    {
+      "field": {
+        "id": "447.1_TOTAL_REGIADO_0_0_16_61",
+        "description": "Índice de salarios total registrado",
+        "title": "total_registrado",
+        "frequency": "R/P1D",
+        "time_index_start": "2015-11-01",
+        "time_index_end": "2021-02-28",
+        "units": "31-oct-16=100",
+        "hits_90_days": "0"
+      },
+      "dataset": {
+        "title": "Coeficiente de Variación Salarial (CVS)",
+        "publisher": {
+          "name": "Subsecretaría de Programación Macroeconómica"
+        },
+        "source": "Instituto Nacional de Estadística y Censos (INDEC)",
+        "theme": "Dinero y Bancos"
+      }
+    },
+    {
+      "field": {
+        "id": "18.1_NG_1997_A_13",
+        "description": "Índice de Salarios por Obrero (ISO). Índice General. Anuales",
+        "title": "nivel_general",
+        "frequency": "R/P1Y",
+        "time_index_start": "1990-01-01",
+        "time_index_end": "2014-01-01",
+        "units": "Índice 1997=100",
+        "hits_90_days": "0"
+      },
+      "dataset": {
+        "title": "Índice de Salario por Obrero (ISO)",
+        "publisher": {
+          "name": "Subsecretaría de Programación Macroeconómica"
+        },
+        "source": "Instituto Nacional de Estadística y Censos (INDEC)",
+        "theme": "Actividad"
+      }
+    },
+    {
+      "field": {
+        "id": "18.2_NG_1997_T_13",
+        "description": "Índice de Salarios por Obrero (ISO). Índice General. Trimestrales",
+        "title": "nivel_general",
+        "frequency": "R/P3M",
+        "time_index_start": "1990-01-01",
+        "time_index_end": "2015-07-01",
+        "units": "Índice 1997=100",
+        "hits_90_days": "0"
+      },
+      "dataset": {
+        "title": "Índice de Salario por Obrero (ISO)",
+        "publisher": {
+          "name": "Subsecretaría de Programación Macroeconómica"
+        },
+        "source": "Instituto Nacional de Estadística y Censos (INDEC)",
+        "theme": "Actividad"
+      }
+    },
+    {
+      "field": {
+        "id": "149.1_SOR_PRIADO_OCTU_0_25",
+        "description": "Índice de Salarios. Empleo registrado. Sector privado.",
+        "title": "indice_salarios_registrado_sector_privado",
+        "frequency": "R/P1M",
+        "time_index_start": "2015-10-01",
+        "time_index_end": "2026-07-01",
+        "units": "Índice",
+        "hits_90_days": "0"
+      },
+      "dataset": {
+        "title": "Índice de salarios. Base octubre 2016",
+        "publisher": {
+          "name": "Subsecretaría de Programación Macroeconómica"
+        },
+        "source": "Instituto Nacional de Estadística y Censos (INDEC)",
+        "theme": "Empleo e Ingresos"
+      }
+    },
+    {
+      "field": {
+        "id": "149.1_SOR_PUBICO_OCTU_0_14",
+        "description": "Índice de Salarios. Empleo registrado. Sector público.",
+        "title": "indice_salarios_registrado_sector_publico",
+        "frequency": "R/P1M",
+        "time_index_start": "2015-10-01",
+        "time_index_end": "2026-07-01",
+        "units": "Índice",
+        "hits_90_days": "0"
+      },
+      "dataset": {
+        "title": "Índice de salarios. Base octubre 2016",
+        "publisher": {
+          "name": "Subsecretaría de Programación Macroeconómica"
+        },
+        "source": "Instituto Nacional de Estadística y Censos (INDEC)",
+        "theme": "Empleo e Ingresos"
+      }
+    },
+    {
+      "field": {
+        "id": "19.1_NG_1997_0_13",
+        "description": "Índice de Salarios por Obrero (ISO) (revisado). Índice General. Variaciones interanuales, Trimestrales.",
+        "title": "nivel_general",
+        "frequency": "R/P3M",
+        "time_index_start": "2016-01-01",
+        "time_index_end": "2016-07-01",
+        "units": "Variación Porcentual",
+        "hits_90_days": "0"
+      },
+      "dataset": {
+        "title": "Índices de Obreros Ocupados (IOO) (Revisado)",
+        "publisher": {
+          "name": "Subsecretaría de Programación Macroeconómica"
+        },
+        "source": "Instituto Nacional de Estadística y Censos (INDEC)",
+        "theme": "Actividad"
+      }
+    },
+    {
+      "field": {
+        "id": "19.2_NG_1997_0_13",
+        "description": "Índice de Salarios por Obrero (ISO) (revisado). Índice General. Variaciones trimestrales, Trimestrales.",
+        "title": "nivel_general",
+        "frequency": "R/P3M",
+        "time_index_start": "2015-07-01",
+        "time_index_end": "2016-07-01",
+        "units": "Variación Porcentual",
+        "hits_90_days": "0"
+      },
+      "dataset": {
+        "title": "Índices de Obreros Ocupados (IOO) (Revisado)",
+        "publisher": {
+          "name": "Subsecretaría de Programación Macroeconómica"
+        },
+        "source": "Instituto Nacional de Estadística y Censos (INDEC)",
+        "theme": "Actividad"
+      }
+    },
+    {
+      "field": {
+        "id": "21.2_NG_1997_0_13",
+        "description": "Índice de Salarios por Obrero (ISO) (revisado). Índice General. Variaciones trimestrales, Trimestrales.",
+        "title": "nivel_general",
+        "frequency": "R/P3M",
+        "time_index_start": "2015-04-01",
+        "time_index_end": "2016-07-01",
+        "units": "Variación Porcentual",
+        "hits_90_days": "0"
+      },
+      "dataset": {
+        "title": "Índice de Salario por Obrero (ISO) (Revisado)",
+        "publisher": {
+          "name": "Subsecretaría de Programación Macroeconómica"
+        },
+        "source": "Instituto Nacional de Estadística y Censos (INDEC)",
+        "theme": "Actividad"
+      }
+    },
+    {
+      "field": {
+        "id": "21.1_NG_1997_0_13",
+        "description": "Índice de Salarios por Obrero (ISO) (revisado). Índice General. Variaciones interanuales, Trimestrales.",
+        "title": "nivel_general",
+        "frequency": "R/P3M",
+        "time_index_start": "2016-01-01",
+        "time_index_end": "2016-07-01",
+        "units": "Variación Porcentual",
+        "hits_90_days": "0"
+      },
+      "dataset": {
+        "title": "Índice de Salario por Obrero (ISO) (Revisado)",
+        "publisher": {
+          "name": "Subsecretaría de Programación Macroeconómica"
+        },
+        "source": "Instituto Nacional de Estadística y Censos (INDEC)",
+        "theme": "Actividad"
+      }
+    },
+    {
+      "field": {
+        "id": "149.1_SOR_PRIADO_OCTU_0_28",
+        "description": "Índice de Salarios. Empleo no registrado. Sector privado.",
+        "title": "indice_salarios_no_registrado_sector_privado",
+        "frequency": "R/P1M",
+        "time_index_start": "2016-10-01",
+        "time_index_end": "2026-07-01",
+        "units": "Índice",
+        "hits_90_days": "0"
+      },
+      "dataset": {
+        "title": "Índice de salarios. Base octubre 2016",
+        "publisher": {
+          "name": "Subsecretaría de Programación Macroeconómica"
+        },
+        "source": "Instituto Nacional de Estadística y Censos (INDEC)",
+        "theme": "Empleo e Ingresos"
+      }
+    },
+    {
+      "field": {
+        "id": "19.2_FET_1997_0_29",
+        "description": "Índice de Salarios por Obrero (ISO) (revisado). Fabricacion de equipos de transporte. Variaciones trimestrales, Trimestrales.",
+        "title": "fabricacion_equipo_transporte",
+        "frequency": "R/P3M",
+        "time_index_start": "2016-01-01",
+        "time_index_end": "2016-07-01",
+        "units": "Variación Porcentual",
+        "hits_90_days": "0"
+      },
+      "dataset": {
+        "title": "Índices de Obreros Ocupados (IOO) (Revisado)",
+        "publisher": {
+          "name": "Subsecretaría de Programación Macroeconómica"
+        },
+        "source": "Instituto Nacional de Estadística y Censos (INDEC)",
+        "theme": "Actividad"
+      }
+    },
+    {
+      "field": {
+        "id": "19.2_FPCP_1997_0_37",
+        "description": "Índice de Salarios por Obrero (ISO) (revisado). Fabricacion de productos de caucho. Variaciones trimestrales, Trimestrales.",
+        "title": "fabricacion_productos_caucho_plastico",
+        "frequency": "R/P3M",
+        "time_index_start": "2016-01-01",
+        "time_index_end": "2016-07-01",
+        "units": "Variación Porcentual",
+        "hits_90_days": "0"
+      },
+      "dataset": {
+        "title": "Índices de Obreros Ocupados (IOO) (Revisado)",
+        "publisher": {
+          "name": "Subsecretaría de Programación Macroeconómica"
+        },
+        "source": "Instituto Nacional de Estadística y Censos (INDEC)",
+        "theme": "Actividad"
+      }
+    },
+    {
+      "field": {
+        "id": "19.1_FMC_1997_0_27",
+        "description": "Índice de Salarios por Obrero (ISO) (revisado). Fabricación de metales comunes. Variaciones interanuales, Trimestrales.",
+        "title": "fabricacion_metales_comunes",
+        "frequency": "R/P3M",
+        "time_index_start": "2016-01-01",
+        "time_index_end": "2016-07-01",
+        "units": "Variación Porcentual",
+        "hits_90_days": "0"
+      },
+      "dataset": {
+        "title": "Índices de Obreros Ocupados (IOO) (Revisado)",
+        "publisher": {
+          "name": "Subsecretaría de Programación Macroeconómica"
+        },
+        "source": "Instituto Nacional de Estadística y Censos (INDEC)",
+        "theme": "Actividad"
+      }
+    },
+    {
+      "field": {
+        "id": "21.2_FMC_1997_0_27",
+        "description": "Índice de Salarios por Obrero (ISO) (revisado). Fabricacion de metales comunes. Variaciones trimestrales, Trimestrales.",
+        "title": "fabricacion_metales_comunes",
+        "frequency": "R/P3M",
+        "time_index_start": "2016-01-01",
+        "time_index_end": "2016-07-01",
+        "units": "Variación Porcentual",
+        "hits_90_days": "0"
+      },
+      "dataset": {
+        "title": "Índice de Salario por Obrero (ISO) (Revisado)",
+        "publisher": {
+          "name": "Subsecretaría de Programación Macroeconómica"
+        },
+        "source": "Instituto Nacional de Estadística y Censos (INDEC)",
+        "theme": "Actividad"
+      }
+    },
+    {
+      "field": {
+        "id": "21.2_FPT_1997_0_30",
+        "description": "Índice de Salarios por Obrero (ISO) (revisado). Fabricacion de productos textiles. Variaciones trimestrales, Trimestrales.",
+        "title": "fabricacion_productos_textiles",
+        "frequency": "R/P3M",
+        "time_index_start": "2016-01-01",
+        "time_index_end": "2016-07-01",
+        "units": "Variación Porcentual",
+        "hits_90_days": "0"
+      },
+      "dataset": {
+        "title": "Índice de Salario por Obrero (ISO) (Revisado)",
+        "publisher": {
+          "name": "Subsecretaría de Programación Macroeconómica"
+        },
+        "source": "Instituto Nacional de Estadística y Censos (INDEC)",
+        "theme": "Actividad"
+      }
+    },
+    {
+      "field": {
+        "id": "21.1_FMC_1997_0_27",
+        "description": "Índice de Salarios por Obrero (ISO) (revisado). Fabricación de metales comunes. Variaciones interanuales, Trimestrales.",
+        "title": "fabricacion_metales_comunes",
+        "frequency": "R/P3M",
+        "time_index_start": "2016-01-01",
+        "time_index_end": "2016-07-01",
+        "units": "Variación Porcentual",
+        "hits_90_days": "0"
+      },
+      "dataset": {
+        "title": "Índice de Salario por Obrero (ISO) (Revisado)",
+        "publisher": {
+          "name": "Subsecretaría de Programación Macroeconómica"
+        },
+        "source": "Instituto Nacional de Estadística y Censos (INDEC)",
+        "theme": "Actividad"
+      }
+    },
+    {
+      "field": {
+        "id": "18.1_FMOCI_1997_A_55",
+        "description": "Índice de Salarios por Obrero (ISO). Fabricación maquinaria y equipos de oficina. Anuales",
+        "title": "fabricacion_maquinaria_oficina_contabilidad_informatica",
+        "frequency": "R/P1Y",
+        "time_index_start": "1990-01-01",
+        "time_index_end": "2009-01-01",
+        "units": "Índice 1997=100",
+        "hits_90_days": "0"
+      },
+      "dataset": {
+        "title": "Índice de Salario por Obrero (ISO)",
+        "publisher": {
+          "name": "Subsecretaría de Programación Macroeconómica"
+        },
+        "source": "Instituto Nacional de Estadística y Censos (INDEC)",
+        "theme": "Actividad"
+      }
+    }
+  ],
+  "count": 3268,
+  "limit": 20,
+  "start": 0
+}

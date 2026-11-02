@@ -1,0 +1,111 @@
+{
+  "corridas": [
+    {
+      "fecha": "2026-10-30",
+      "mediana_general": 1323233,
+      "rubros": [
+        {
+          "id": "full-stack",
+          "mediana": 2805167,
+          "n": 2
+        },
+        {
+          "id": "soporte-tecnico",
+          "mediana": 1800000,
+          "n": 5
+        },
+        {
+          "id": "devops",
+          "mediana": 1500000,
+          "n": 2
+        },
+        {
+          "id": "programador",
+          "mediana": 1411616,
+          "n": 10
+        },
+        {
+          "id": "analista-de-datos",
+          "mediana": 1356616,
+          "n": 2
+        },
+        {
+          "id": "desarrollador",
+          "mediana": 1323233,
+          "n": 9
+        },
+        {
+          "id": "desarrollador-frontend",
+          "mediana": 1111111,
+          "n": 1
+        },
+        {
+          "id": "analista-funcional",
+          "mediana": 541469,
+          "n": 10
+        },
+        {
+          "id": "desarrollador-backend",
+          "mediana": null,
+          "n": 0
+        },
+        {
+          "id": "tester-qa",
+          "mediana": null,
+          "n": 0
+        }
+      ]
+    },
+    {
+      "fecha": "2026-10-31",
+      "mediana_general": 1750000,
+      "rubros": [
+        {
+          "id": "soporte",
+          "mediana": 1900000,
+          "n": 4
+        },
+        {
+          "id": "qa",
+          "mediana": 1700000,
+          "n": 3
+        },
+        {
+          "id": "backend",
+          "mediana": 1500000,
+          "n": 3
+        },
+        {
+          "id": "funcional",
+          "mediana": 1500000,
+          "n": 7
+        },
+        {
+          "id": "datos",
+          "mediana": 1350000,
+          "n": 4
+        },
+        {
+          "id": "desarrollo",
+          "mediana": null,
+          "n": 2
+        },
+        {
+          "id": "devops",
+          "mediana": null,
+          "n": 2
+        },
+        {
+          "id": "frontend",
+          "mediana": null,
+          "n": 0
+        },
+        {
+          "id": "full-stack",
+          "mediana": null,
+          "n": 0
+        }
+      ]
+    }
+  ]
+}

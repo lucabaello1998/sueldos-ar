@@ -1,0 +1,28 @@
+## Build
+bin/
+obj/
+*.user
+*.suo
+.vs/
+artifacts/
+TestResults/
+
+## Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+
+## Editores
+.idea/
+.vscode/
+*.swp
+
+## Sistema
+.DS_Store
+Thumbs.db
+
+## Datos locales del observatorio (los publicados viven en docs/data)
+tools/observatorio/salida-local/

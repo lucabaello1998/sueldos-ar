@@ -1,0 +1,359 @@
+{
+  "generado": "2026-10-31T01:56:14Z",
+  "fuente": "Computrabajo Argentina (avisos con salario publicado)",
+  "url_fuente": "https://ar.computrabajo.com/",
+  "metodologia": "Mediana de salarios publicados en avisos de Computrabajo Argentina, agrupados por rubro tech. Son avisos de empresas, no encuestas ni liquidaciones reales: solo reflejan a quienes declaran el monto, y un rango se resume con su punto medio. Los rubros con menos de 5 avisos se marcan como muestra insuficiente.",
+  "rubros": [
+    {
+      "id": "soporte",
+      "nombre": "Soporte técnico",
+      "n": 4,
+      "ofertas": 60,
+      "con_salario": 12,
+      "mediana": 1900000,
+      "p25": 1600000,
+      "p75": 2200000,
+      "min": 1000000,
+      "max": 2800000,
+      "suficiente": false,
+      "avisos": [
+        {
+          "titulo": "Tecnico en redes",
+          "empresa": "",
+          "salario_min": 2800000,
+          "salario_max": 2800000,
+          "url": "https://ar.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-tecnico-en-redes-soporte-it-y-redes-en-neuquen-65D8B70A625A92A361373E686DCF3405"
+        },
+        {
+          "titulo": "Técnico Junior de Soporte, Instalaciones y Operaciones",
+          "empresa": "OGM TECH S. R. L",
+          "salario_min": 2000000,
+          "salario_max": 2000000,
+          "url": "https://ar.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-tecnico-junior-de-soporte-instalaciones-y-operaciones-seguridad-electronica-en-neuquen-473C6392CA61809F61373E686DCF3405"
+        },
+        {
+          "titulo": "Técnico de Soporte e Infraestructura IT / Analista de Soporte",
+          "empresa": "Chaxxel",
+          "salario_min": 1800000,
+          "salario_max": 1800000,
+          "url": "https://ar.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-tecnico-de-soporte-e-infraestructura-it-analista-de-soporte-en-gral-pacheco-347A9F3182E4998561373E686DCF3405"
+        },
+        {
+          "titulo": "analista soporte técnico",
+          "empresa": "KEY MARKET SRL",
+          "salario_min": 1000000,
+          "salario_max": 1000000,
+          "url": "https://ar.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-analista-soporte-tecnico-con-experiencia-en-rosario-AF2A00C2548820A661373E686DCF3405"
+        }
+      ]
+    },
+    {
+      "id": "qa",
+      "nombre": "QA / Testing",
+      "n": 3,
+      "ofertas": 68,
+      "con_salario": 11,
+      "mediana": 1700000,
+      "p25": 1450000,
+      "p75": 1850000,
+      "min": 1200000,
+      "max": 2000000,
+      "suficiente": false,
+      "avisos": [
+        {
+          "titulo": "Analista de Calidad",
+          "empresa": "",
+          "salario_min": 1200000,
+          "salario_max": 1200000,
+          "url": "https://ar.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-analista-de-calidad-campana-retencion-en-parque-patricios-7A52111E0C932FE061373E686DCF3405"
+        },
+        {
+          "titulo": "Departamento de calidad en alimentos",
+          "empresa": "Yin Yang argentina",
+          "salario_min": 2000000,
+          "salario_max": 2000000,
+          "url": "https://ar.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-departamento-de-calidad-en-alimentos-en-remedios-de-escalada-25134B4495C5839D61373E686DCF3405"
+        },
+        {
+          "titulo": "Responsable del área de calidad y BPM",
+          "empresa": "Tres Pasos",
+          "salario_min": 1700000,
+          "salario_max": 1700000,
+          "url": "https://ar.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-responsable-del-area-de-calidad-y-bpm-en-tigre-F90CCE63D4819C7D61373E686DCF3405"
+        }
+      ]
+    },
+    {
+      "id": "backend",
+      "nombre": "Backend",
+      "n": 3,
+      "ofertas": 113,
+      "con_salario": 34,
+      "mediana": 1500000,
+      "p25": 1350000,
+      "p75": 2600000,
+      "min": 1200000,
+      "max": 3700000,
+      "suficiente": false,
+      "avisos": [
+        {
+          "titulo": "Analista de comercio electrónico",
+          "empresa": "ALVAREZ ROMERO SUSANA LORENA",
+          "salario_min": 1500000,
+          "salario_max": 1500000,
+          "url": "https://ar.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-analista-de-comercio-electronico-jornada-completa-en-la-paternal-39AB8D140BDBCCC161373E686DCF3405"
+        },
+        {
+          "titulo": "Lider Tecnico",
+          "empresa": "ESolutions SA",
+          "salario_min": 3700000,
+          "salario_max": 3700000,
+          "url": "https://ar.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-lider-tecnico-en-cordoba-8985EADB18ADC5DB61373E686DCF3405"
+        },
+        {
+          "titulo": "Tecnico Informatico",
+          "empresa": "Servicios Informaticos Compusoft",
+          "salario_min": 1200000,
+          "salario_max": 1200000,
+          "url": "https://ar.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-tecnico-informatico-con-experiencia-en-cordoba-A30ED899649A738861373E686DCF3405"
+        }
+      ]
+    },
+    {
+      "id": "funcional",
+      "nombre": "Análisis funcional",
+      "n": 7,
+      "ofertas": 110,
+      "con_salario": 28,
+      "mediana": 1500000,
+      "p25": 541469,
+      "p75": 2750000,
+      "min": 313233,
+      "max": 3500000,
+      "suficiente": true,
+      "avisos": [
+        {
+          "titulo": "Analista Contable Senior",
+          "empresa": "",
+          "salario_min": 3500000,
+          "salario_max": 3500000,
+          "url": "https://ar.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-analista-contable-senior-grupo-agroexportador-puerto-madero-presencial-en-puerto-madero-B843EFAE939CF02161373E686DCF3405"
+        },
+        {
+          "titulo": "Analista Sr. de Liquidación de Sueldos y Hard HR Contado Público",
+          "empresa": "Moviled",
+          "salario_min": 2000000,
+          "salario_max": 2000000,
+          "url": "https://ar.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-analista-sr-de-liquidacion-de-sueldos-y-hard-hr-contado-publico-en-lomas-de-zamora-DC41ED7C04E7C2C061373E686DCF3405"
+        },
+        {
+          "titulo": "Analista de compras",
+          "empresa": "Farmaplus",
+          "salario_min": 1500000,
+          "salario_max": 1500000,
+          "url": "https://ar.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-analista-de-compras-en-retiro-CDCC49E8169E551261373E686DCF3405"
+        },
+        {
+          "titulo": "Consultor SAP SD",
+          "empresa": "C&S informática s.a.",
+          "salario_min": 600000,
+          "salario_max": 600000,
+          "url": "https://ar.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-consultor-sap-sd-bajo-relacion-de-dependencia-en-san-nicolas-69372D68EE5BDAAE61373E686DCF3405"
+        },
+        {
+          "titulo": "Desarrollador Power Buillder Appeon",
+          "empresa": "Niztech",
+          "salario_min": 3500000,
+          "salario_max": 3500000,
+          "url": "https://ar.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-desarrollador-power-buillder-appeon-soporte-y-mantenimiento-evolutivo-en-recoleta-DA883BB113A5F48D61373E686DCF3405"
+        },
+        {
+          "titulo": "Ref. 21429: Analista Funcional de Operaciones / Híbrido Olivos Prov. Bs As",
+          "empresa": "ADN - Recursos Humanos",
+          "salario_min": 313233,
+          "salario_max": 313233,
+          "url": "https://ar.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-ref-21429-analista-funcional-de-operaciones-hibrido-olivos-prov-bs-as-en-olivos-02ADEC858C8E217261373E686DCF3405"
+        },
+        {
+          "titulo": "Ref. 21445: Consultor Funcional Odoo / Híbrido Núñez CABA",
+          "empresa": "ADN - Recursos Humanos",
+          "salario_min": 482938,
+          "salario_max": 482938,
+          "url": "https://ar.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-ref-21445-consultor-funcional-odoo-hibrido-nunez-caba-en-nunez-3662582E15844A0561373E686DCF3405"
+        }
+      ]
+    },
+    {
+      "id": "datos",
+      "nombre": "Datos",
+      "n": 4,
+      "ofertas": 118,
+      "con_salario": 29,
+      "mediana": 1350000,
+      "p25": 850000,
+      "p75": 1900000,
+      "min": 700000,
+      "max": 2200000,
+      "suficiente": false,
+      "avisos": [
+        {
+          "titulo": "Analista de compras Junior Zona Saavedra",
+          "empresa": "Grupo Ceta Argentina",
+          "salario_min": 1800000,
+          "salario_max": 1800000,
+          "url": "https://ar.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-analista-de-compras-junior-zona-saavedra-en-saavedra-7566D41D791B38B361373E686DCF3405"
+        },
+        {
+          "titulo": "Asesor/a inmobiliario",
+          "empresa": "UNION DESARROLLOS",
+          "salario_min": 700000,
+          "salario_max": 700000,
+          "url": "https://ar.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-asesora-inmobiliario-con-o-sin-experiencia-en-haedo-4D105A5AADA75C6D61373E686DCF3405"
+        },
+        {
+          "titulo": "Ejecutivo de Cuentas",
+          "empresa": "Pullmen RRHH",
+          "salario_min": 2200000,
+          "salario_max": 2200000,
+          "url": "https://ar.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-ejecutivo-de-cuentas-kam-en-quilmes-5718E59C32F7DE7461373E686DCF3405"
+        },
+        {
+          "titulo": "Telemarketer",
+          "empresa": "PL Comms",
+          "salario_min": 900000,
+          "salario_max": 900000,
+          "url": "https://ar.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-telemarketer-asesor-telefonico-parttime-hasta-1800000-en-boulogne-D365B3C9FBCC9F1C61373E686DCF3405"
+        }
+      ]
+    },
+    {
+      "id": "desarrollo",
+      "nombre": "Desarrollo (general)",
+      "n": 2,
+      "ofertas": 62,
+      "con_salario": 23,
+      "mediana": null,
+      "p25": null,
+      "p75": null,
+      "min": 1800000,
+      "max": 2000000,
+      "suficiente": false,
+      "avisos": [
+        {
+          "titulo": "Programador Junior",
+          "empresa": "",
+          "salario_min": 1800000,
+          "salario_max": 1800000,
+          "url": "https://ar.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-programador-junior-en-palermo-54FE2A9AB7D7AF2561373E686DCF3405"
+        },
+        {
+          "titulo": "desarrollador/a",
+          "empresa": "PINEDO JULIETA SOLEDAD",
+          "salario_min": 2000000,
+          "salario_max": 2000000,
+          "url": "https://ar.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-desarrolladora-en-mar-del-plata-146EB7FAF4DDF0B361373E686DCF3405"
+        }
+      ]
+    },
+    {
+      "id": "devops",
+      "nombre": "DevOps / Infra",
+      "n": 2,
+      "ofertas": 90,
+      "con_salario": 22,
+      "mediana": null,
+      "p25": null,
+      "p75": null,
+      "min": 1628190,
+      "max": 2000000,
+      "suficiente": false,
+      "avisos": [
+        {
+          "titulo": "Vigilador General Santa Fe Capital",
+          "empresa": "Grupo San Miguel",
+          "salario_min": 1628190,
+          "salario_max": 1628190,
+          "url": "https://ar.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-vigilador-general-santa-fe-capital-en-santa-fe-AE05E2B843C3B2B361373E686DCF3405"
+        },
+        {
+          "titulo": "desarrollador/a",
+          "empresa": "PINEDO JULIETA SOLEDAD",
+          "salario_min": 2000000,
+          "salario_max": 2000000,
+          "url": "https://ar.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-desarrolladora-en-mar-del-plata-146EB7FAF4DDF0B361373E686DCF3405"
+        }
+      ]
+    },
+    {
+      "id": "frontend",
+      "nombre": "Frontend",
+      "n": 0,
+      "ofertas": 33,
+      "con_salario": 14,
+      "mediana": null,
+      "p25": null,
+      "p75": null,
+      "min": null,
+      "max": null,
+      "suficiente": false,
+      "avisos": []
+    },
+    {
+      "id": "full-stack",
+      "nombre": "Full Stack",
+      "n": 0,
+      "ofertas": 22,
+      "con_salario": 10,
+      "mediana": null,
+      "p25": null,
+      "p75": null,
+      "min": null,
+      "max": null,
+      "suficiente": false,
+      "avisos": []
+    }
+  ],
+  "mediana_general": 1750000,
+  "n_general": 24,
+  "descartados": {
+    "fuera_de_rango": 6,
+    "centinela": 129,
+    "spam": 0,
+    "no_tech": 20,
+    "duplicado": 2,
+    "atipico": 1
+  },
+  "transparencia": {
+    "ofertas_unicas": 556,
+    "declaran_salario": 152,
+    "declaran_salario_pct": 27.3,
+    "monto_plausible": 27,
+    "monto_plausible_pct": 17.8,
+    "montos_repetidos": [
+      1244145,
+      1323233
+    ]
+  },
+  "resumen_corrida": {
+    "terminos_consultados": 18,
+    "avisos_recolectados": 676,
+    "avisos_utilizables": 24,
+    "sin_salario_publicado": 493,
+    "filtros": {
+      "minimo_pesos": 150000,
+      "maximo_pesos": 20000000,
+      "centinelas": [
+        2000,
+        2222,
+        11111,
+        999999,
+        1111111,
+        2222222,
+        3333333,
+        9999999
+      ],
+      "umbral_spam": 0.4,
+      "repeticiones_relleno": 5
+    }
+  }
+}

@@ -1,0 +1,112 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  calidad:
+    name: Build + tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+
+      - name: Restore
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build --no-restore -c Release -warnaserror
+
+      - name: Tests
+        run: dotnet test --no-build -c Release --logger "console;verbosity=normal"
+
+  observatorio:
+    name: Observatorio (Python)
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar herramientas
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest ruff
+
+      - name: Ruff
+        run: |
+          ruff check tools
+          ruff format --check tools
+
+      - name: Tests del observatorio
+        run: python -m pytest -q
+
+      - name: Corrida offline (usa fixtures, sin red)
+        run: python -m tools.observatorio.construir --offline --docs /tmp/salida-offline
+
+  api:
+    name: Smoke test de la API
+    runs-on: ubuntu-latest
+    needs: calidad
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+
+      - name: Levantar la app
+        run: |
+          dotnet run --project src/SueldosAr.Web --urls http://127.0.0.1:8095 &
+          for i in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:8095/api/salud > /dev/null; then
+              echo "API arriba"; break
+            fi
+            sleep 2
+          done
+
+      - name: Probar los endpoints
+        run: |
+          set -e
+          curl -fsS http://127.0.0.1:8095/ | grep -q "sueldos-ar"
+          curl -fsS http://127.0.0.1:8095/api/parametros | grep -q "2024-07"
+
+          curl -fsS -X POST http://127.0.0.1:8095/api/liquidacion \
+            -H "Content-Type: application/json" \
+            -d '{"sueldoBasico":1500000,"fechaIngreso":"2018-04-01","edad":28,"anio":2026,"mes":3}' \
+            | tee /tmp/recibo.json | grep -q '"neto"'
+
+          curl -fsS -X POST http://127.0.0.1:8095/api/sac \
+            -H "Content-Type: application/json" \
+            -d '{"sueldoBasico":1800000,"mejorRemuneracionSemestre":1800000,"fechaIngreso":"2016-01-01","anio":2026,"mes":6}' \
+            | grep -q '"importe"'
+
+          curl -fsS -X POST http://127.0.0.1:8095/api/vacaciones \
+            -H "Content-Type: application/json" \
+            -d '{"fechaIngreso":"2018-04-01","anio":2026,"sueldoBasico":1500000}' \
+            | grep -q '"diasCorresponden"'
+
+          curl -fsS -X POST http://127.0.0.1:8095/api/indemnizacion \
+            -H "Content-Type: application/json" \
+            -d '{"sueldoBasico":1500000,"fechaIngreso":"2018-04-01","fechaDespido":"2026-03-15"}' \
+            | grep -q '"total"'
+
+          echo "Todos los endpoints respondieron bien."

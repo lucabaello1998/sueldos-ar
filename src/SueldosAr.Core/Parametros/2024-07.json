@@ -1,0 +1,42 @@
+{
+  "id": "2024-07",
+  "nombre": "Ley 27.743 — julio 2024",
+  "fuente": "Ley 27.743 (BO 15/07/2024), art. 90 y art. 30 de la Ley de Impuesto a las Ganancias",
+  "vigenciaDesde": "2024-07-01",
+  "estimado": false,
+  "nota": "Escala, mínimo no imponible y deducción especial tal como quedaron fijados por la Ley 27.743. Los valores se actualizan por IPC: para períodos posteriores hay que cargar un JSON nuevo en Parametros/.",
+
+  "tasaJubilacion": 0.11,
+  "tasaObraSocial": 0.03,
+  "tasaPami": 0.03,
+  "edadPami": 70,
+  "tasaSindicato": 0.02,
+
+  "contribucionJubilacion": 0.1017,
+  "contribucionObraSocial": 0.06,
+  "contribucionAsignaciones": 0.015,
+  "contribucionFondoEmpleo": 0.005,
+  "contribucionSeguroVida": 0.004,
+
+  "zonaDesfavorable": 0.22,
+  "horasMensuales": 200,
+  "divisorVacaciones": 25,
+
+  "minimoNoImponible": 1875000,
+  "deduccionEspecial": 4500000,
+
+  "escala": [
+    { "hasta": 1875000, "aliquota": 0.05 },
+    { "hasta": 2812500, "aliquota": 0.09 },
+    { "hasta": 4218750, "aliquota": 0.12 },
+    { "hasta": 6562500, "aliquota": 0.15 },
+    { "hasta": 9843750, "aliquota": 0.19 },
+    { "hasta": 14765625, "aliquota": 0.23 },
+    { "hasta": 22148437.5, "aliquota": 0.27 },
+    { "hasta": 33222656.25, "aliquota": 0.31 },
+    { "hasta": null, "aliquota": 0.35 }
+  ],
+
+  "topeIndemnizacion": null,
+  "pisoIndemnizacion": null
+}
