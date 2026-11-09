@@ -1,27 +1,23 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 316" role="img" aria-label="Mediana salarial por rubro" class="grafico">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 270" role="img" aria-label="Mediana salarial por rubro" class="grafico">
 <text x="0" y="14" class="eje-titulo">Mediana mensual por rubro (pesos)</text>
 <text x="0" y="50" class="etiqueta-rubro">Backend</text>
 <rect x="210" y="34" width="520.0" height="22" rx="4" fill="#5eead4" opacity="0.85"></rect>
-<text x="740.0" y="50" class="etiqueta-valor">$ 3,70 M</text>
+<text x="740.0" y="50" class="etiqueta-valor">$ 2,35 M</text>
 <text x="740.0" y="64" class="etiqueta-n">n=3</text>
 <text x="0" y="96" class="etiqueta-rubro">Soporte técnico</text>
-<rect x="210" y="80" width="267.0" height="22" rx="4" fill="#5eead4" opacity="0.85"></rect>
-<text x="487.0" y="96" class="etiqueta-valor">$ 1,90 M</text>
-<text x="487.0" y="110" class="etiqueta-n">n=4</text>
+<rect x="210" y="80" width="420.4" height="22" rx="4" fill="#5eead4" opacity="0.85"></rect>
+<text x="640.4" y="96" class="etiqueta-valor">$ 1,90 M</text>
+<text x="640.4" y="110" class="etiqueta-n">n=4</text>
 <text x="0" y="142" class="etiqueta-rubro">DevOps / Infra</text>
-<rect x="210" y="126" width="213.6" height="22" rx="4" fill="#5eead4" opacity="0.85"></rect>
-<text x="433.6" y="142" class="etiqueta-valor">$ 1,52 M</text>
-<text x="433.6" y="156" class="etiqueta-n">n=4</text>
+<rect x="210" y="126" width="309.8" height="22" rx="4" fill="#5eead4" opacity="0.85"></rect>
+<text x="529.8" y="142" class="etiqueta-valor">$ 1,40 M</text>
+<text x="529.8" y="156" class="etiqueta-n">n=3</text>
 <text x="0" y="188" class="etiqueta-rubro">Datos</text>
-<rect x="210" y="172" width="210.8" height="22" rx="4" fill="#5eead4" opacity="0.85"></rect>
-<text x="430.8" y="188" class="etiqueta-valor">$ 1,50 M</text>
-<text x="430.8" y="202" class="etiqueta-n">n=7</text>
-<text x="0" y="234" class="etiqueta-rubro">QA / Testing</text>
-<rect x="210" y="218" width="203.8" height="22" rx="4" fill="#5eead4" opacity="0.85"></rect>
-<text x="423.8" y="234" class="etiqueta-valor">$ 1,45 M</text>
-<text x="423.8" y="248" class="etiqueta-n">n=6</text>
-<text x="0" y="280" class="etiqueta-rubro">Análisis funcional</text>
-<rect x="210" y="264" width="175.7" height="22" rx="4" fill="#5eead4" opacity="0.85"></rect>
-<text x="395.7" y="280" class="etiqueta-valor">$ 1,25 M</text>
-<text x="395.7" y="294" class="etiqueta-n">n=8</text>
+<rect x="210" y="172" width="221.3" height="22" rx="4" fill="#5eead4" opacity="0.85"></rect>
+<text x="441.3" y="188" class="etiqueta-valor">$ 1,00 M</text>
+<text x="441.3" y="202" class="etiqueta-n">n=5</text>
+<text x="0" y="234" class="etiqueta-rubro">Análisis funcional</text>
+<rect x="210" y="218" width="177.0" height="22" rx="4" fill="#5eead4" opacity="0.85"></rect>
+<text x="397.0" y="234" class="etiqueta-valor">$ 800 K</text>
+<text x="397.0" y="248" class="etiqueta-n">n=7</text>
 </svg>
