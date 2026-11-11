@@ -4,6 +4,7 @@
 aportes, contribuciones, ganancias e indemnizaciones, con la base legal de cada concepto y una UI
 mínima para verlo funcionar.
 
+[![Release](https://img.shields.io/github/v/release/lucabaello1998/sueldos-ar?label=release)](https://github.com/lucabaello1998/sueldos-ar/releases/latest)
 [![CI](https://github.com/lucabaello1998/sueldos-ar/actions/workflows/ci.yml/badge.svg)](https://github.com/lucabaello1998/sueldos-ar/actions/workflows/ci.yml)
 ![.NET](https://img.shields.io/badge/.NET-8.0-512BD4)
 ![xUnit](https://img.shields.io/badge/xUnit-77%20tests-2ea44f)
