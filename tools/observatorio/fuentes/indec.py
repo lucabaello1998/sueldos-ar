@@ -102,10 +102,15 @@ def descargar_serie(serie_id: str, desde: str = "2016-01-01") -> dict:
     puntos = datos.get("data") or []
     if not puntos:
         raise ErrorIndec(f"la serie {serie_id} vino vacía")
+    serie = {fecha: valor for fecha, valor in puntos if valor is not None}
+    if not serie:
+        # Todas las observaciones vinieron en null: sin un solo punto no hay serie
+        # (antes se seguía y `max()` explotaba más adelante).
+        raise ErrorIndec(f"la serie {serie_id} no tiene observaciones con valor")
     return {
         "url": url,
         "meta": (datos.get("meta") or [{}])[-1],
-        "serie": {fecha: valor for fecha, valor in puntos if valor is not None},
+        "serie": serie,
     }
 
 
@@ -117,11 +122,24 @@ def _meses_entre(desde: str, hasta: str) -> int:
 
 
 def _variacion_12m(serie: dict[str, float]) -> float | None:
-    """Variación porcentual contra la observación de 12 meses antes."""
-    fechas = sorted(serie)
-    if len(fechas) < 13:
+    """Variación porcentual contra la observación de 12 meses antes.
+
+    Se busca la fecha exacta, no "13 posiciones atrás": si falta un mes, la
+    posición 13 es de hace 24 meses y la variación publicada sería falsa.
+    """
+    if not serie:
         return None
-    actual, previa = fechas[-1], fechas[-13]
+
+    actual = max(serie)
+    fecha_actual = datetime.strptime(actual[:10], "%Y-%m-%d")
+    try:
+        # 12 meses antes, mismo día.
+        previa = fecha_actual.replace(year=fecha_actual.year - 1).strftime("%Y-%m-%d")
+    except ValueError:
+        return None  # 29 de febrero: no hay fecha equivalente el año anterior
+
+    if previa not in serie:
+        return None
     if not serie[previa]:
         return None
     return round((serie[actual] / serie[previa] - 1) * 100, 2)
@@ -129,6 +147,8 @@ def _variacion_12m(serie: dict[str, float]) -> float | None:
 
 def _armar(serie: dict[str, float], meta: dict, url: str, hoy: datetime) -> dict:
     """Construye la ficha de una serie a partir de sus puntos."""
+    if not serie:
+        raise ErrorIndec("la serie no tiene observaciones con valor")
     campo = meta.get("field", {})
     dataset = meta.get("dataset", {})
     hasta = max(serie)

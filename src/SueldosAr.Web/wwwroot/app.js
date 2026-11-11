@@ -99,8 +99,18 @@ function dona(partes, centroEtiqueta, centroValor) {
   </div>`;
 }
 
+// Todo lo que viene de la API (incluido un mensaje de error que refleja lo que el
+// usuario escribió) se muestra como texto, nunca se interpreta como HTML.
+const escapar = (valor) =>
+  String(valor ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+
 function mostrarError(id, mensaje) {
-  document.getElementById(id).innerHTML = `<div class="error">${mensaje}</div>`;
+  const contenedor = document.getElementById(id);
+  contenedor.replaceChildren();
+  const caja = document.createElement('div');
+  caja.className = 'error';
+  caja.textContent = mensaje;
+  contenedor.append(caja);
 }
 
 async function pedir(url, datos) {
@@ -110,9 +120,47 @@ async function pedir(url, datos) {
     body: JSON.stringify(datos)
   });
 
-  const cuerpo = await res.json();
-  if (!res.ok) throw new Error(cuerpo.error || 'No se pudo calcular');
+  // Se mira el estado antes de parsear: un 500 en producción viene sin cuerpo y
+  // `res.json()` fallaba con "Unexpected end of JSON input", escondiendo el error.
+  const texto = await res.text();
+  let cuerpo = null;
+  try {
+    cuerpo = texto ? JSON.parse(texto) : null;
+  } catch {
+    cuerpo = null;
+  }
+
+  if (!res.ok) {
+    throw new Error(cuerpo?.error || `El servidor respondió ${res.status}. Probá de nuevo.`);
+  }
+  if (!cuerpo) throw new Error('El servidor devolvió una respuesta vacía.');
   return cuerpo;
+}
+
+// Un formulario, una petición viva: evita el doble envío y que una respuesta vieja
+// que llega tarde pise el resultado de la nueva.
+const peticiones = new WeakMap();
+
+async function enviar(form, url, datos, destinoId, render) {
+  const boton = form.querySelector('button[type="submit"]');
+  const turno = (peticiones.get(form) || 0) + 1;
+  peticiones.set(form, turno);
+  boton?.setAttribute('disabled', '');
+  form.setAttribute('aria-busy', 'true');
+
+  try {
+    const respuesta = await pedir(url, datos);
+    if (peticiones.get(form) !== turno) return;
+    document.getElementById(destinoId).innerHTML = render(respuesta);
+  } catch (error) {
+    if (peticiones.get(form) !== turno) return;
+    mostrarError(destinoId, error.message);
+  } finally {
+    if (peticiones.get(form) === turno) {
+      boton?.removeAttribute('disabled');
+      form.removeAttribute('aria-busy');
+    }
+  }
 }
 
 const datosDelFormulario = (form) => {
@@ -146,14 +194,8 @@ document.getElementById('form-sueldo').addEventListener('submit', async (evento)
     zonaDesfavorable: datos.zonaDesfavorable === 'on'
   };
 
-  try {
-    const recibo = await pedir('/api/liquidacion', pedido);
-    document.getElementById('resultado-sueldo').innerHTML = renderRecibo(recibo);
-  } catch (error) {
-    mostrarError('resultado-sueldo', error.message);
-  }
+  await enviar(form, '/api/liquidacion', pedido, 'resultado-sueldo', renderRecibo);
 });
-
 function renderRecibo(r) {
   const remunerativos = r.conceptos.filter((c) => c.tipo === 'Remunerativo' || c.tipo === 0);
   const descuentos = r.conceptos.filter((c) => c.tipo === 'Descuento' || c.tipo === 1);
@@ -163,14 +205,14 @@ function renderRecibo(r) {
     lista
       .map(
         (c) => `<tr>
-          <td><strong>${c.codigo}</strong> ${c.detalle}<span class="base">${c.baseLegal}</span></td>
+          <td><strong>${escapar(c.codigo)}</strong> ${escapar(c.detalle)}<span class="base">${escapar(c.baseLegal)}</span></td>
           <td class="num ${clase}">${pesos(c.importe)}</td>
         </tr>`
       )
       .join('');
 
   const advertencias = (r.advertencias || [])
-    .map((a) => `<div class="advertencia">${a}</div>`)
+    .map((a) => `<div class="advertencia">${escapar(a)}</div>`)
     .join('');
 
   return `
@@ -230,20 +272,21 @@ function renderRecibo(r) {
 /* ---------------- SAC ---------------- */
 document.getElementById('form-sac').addEventListener('submit', async (evento) => {
   evento.preventDefault();
-  const datos = datosDelFormulario(evento.target);
+  const form = evento.target;
+  const datos = datosDelFormulario(form);
   const [anio, mes] = (datos.periodo || '2026-06').split('-');
 
-  try {
-    const r = await pedir('/api/sac', {
-      nombre: 'SAC',
-      sueldoBasico: Number(datos.mejor || 0),
-      mejorRemuneracionSemestre: Number(datos.mejor || 0),
-      fechaIngreso: '2016-01-01',
-      anio: Number(anio),
-      mes: Number(mes)
-    });
+  const pedido = {
+    nombre: 'SAC',
+    sueldoBasico: Number(datos.sueldoBasico || datos.mejor || 0),
+    mejorRemuneracionSemestre: Number(datos.mejor || 0),
+    fechaIngreso: datos.fechaIngreso || '2016-01-01',
+    diasTrabajados: datos.dias ? Number(datos.dias) : null,
+    anio: Number(anio),
+    mes: Number(mes)
+  };
 
-    document.getElementById('resultado-sac').innerHTML = `
+  await enviar(form, '/api/sac', pedido, 'resultado-sac', (r) => `
       ${tarjetas([
         { rotulo: 'Mejor remuneración', valor: pesos(r.mejorRemuneracion) },
         { rotulo: 'Días computados', valor: `${r.diasTrabajados} / ${r.diasDelSemestre}` },
@@ -262,26 +305,23 @@ document.getElementById('form-sac').addEventListener('submit', async (evento) =>
           ? 'Es proporcional: no se trabajó el semestre completo.'
           : 'Semestre completo: corresponde la mitad de la mejor remuneración.'}
         Base legal: Ley 23.041 y art. 121 LCT.
-      </p>`;
-  } catch (error) {
-    mostrarError('resultado-sac', error.message);
-  }
+      </p>`);
 });
 
 /* ---------------- vacaciones ---------------- */
 document.getElementById('form-vacaciones').addEventListener('submit', async (evento) => {
   evento.preventDefault();
-  const datos = datosDelFormulario(evento.target);
+  const form = evento.target;
+  const datos = datosDelFormulario(form);
 
-  try {
-    const r = await pedir('/api/vacaciones', {
-      fechaIngreso: datos.fechaIngreso,
-      anio: Number(datos.anio || 2026),
-      sueldoBasico: Number(datos.sueldoBasico || 0),
-      diasTomados: datos.diasTomados ? Number(datos.diasTomados) : null
-    });
+  const pedido = {
+    fechaIngreso: datos.fechaIngreso,
+    anio: Number(datos.anio || 2026),
+    sueldoBasico: Number(datos.sueldoBasico || 0),
+    diasTomados: datos.diasTomados ? Number(datos.diasTomados) : null
+  };
 
-    document.getElementById('resultado-vacaciones').innerHTML = `
+  await enviar(form, '/api/vacaciones', pedido, 'resultado-vacaciones', (r) => `
       ${tarjetas([
         { rotulo: 'Antigüedad', valor: `${r.aniosAntiguedad} años` },
         { rotulo: 'Días que corresponden', valor: `${r.diasCorresponden}` },
@@ -291,31 +331,29 @@ document.getElementById('form-vacaciones').addEventListener('submit', async (eve
       <p class="nota">
         ${r.diasTomados} de ${r.diasCorresponden} días corridos, sobre un sueldo dividido 25.
         Base legal: arts. 150 y 155 LCT.
-      </p>`;
-  } catch (error) {
-    mostrarError('resultado-vacaciones', error.message);
-  }
+      </p>`);
 });
 
 /* ---------------- indemnización ---------------- */
 document.getElementById('form-indemnizacion').addEventListener('submit', async (evento) => {
   evento.preventDefault();
-  const datos = datosDelFormulario(evento.target);
+  const form = evento.target;
+  const datos = datosDelFormulario(form);
 
-  try {
-    const r = await pedir('/api/indemnizacion', {
-      sueldoBasico: Number(datos.sueldoBasico || 0),
-      fechaIngreso: datos.fechaIngreso,
-      fechaDespido: datos.fechaDespido,
-      mejorRemuneracion: datos.mejorRemuneracion ? Number(datos.mejorRemuneracion) : null
-    });
+  const pedido = {
+    sueldoBasico: Number(datos.sueldoBasico || 0),
+    fechaIngreso: datos.fechaIngreso,
+    fechaDespido: datos.fechaDespido,
+    mejorRemuneracion: datos.mejorRemuneracion ? Number(datos.mejorRemuneracion) : null
+  };
 
+  await enviar(form, '/api/indemnizacion', pedido, 'resultado-indemnizacion', (r) => {
     const avisos = [
       r.topeAplicado ? '<div class="advertencia">Se aplicó el tope del art. 245 configurado en los parámetros.</div>' : '',
       r.pisoAplicado ? '<div class="advertencia">Se aplicó el piso indemnizatorio configurado.</div>' : ''
     ].join('');
 
-    document.getElementById('resultado-indemnizacion').innerHTML = `
+    return `
       ${avisos}
       ${tarjetas([
         { rotulo: 'Años computados', valor: `${r.aniosComputados}` },
@@ -337,15 +375,13 @@ document.getElementById('form-indemnizacion').addEventListener('submit', async (
         <tbody>
           <tr><td>Mejor remuneración mensual</td><td class="num">${pesos(r.mejorRemuneracion)}</td></tr>
           <tr><td>Antigüedad (${r.aniosComputados} años, art. 245)</td><td class="num">${pesos(r.antiguedad)}</td></tr>
-          <tr><td>Preaviso (${r.mesesPreaviso} ${r.mesesPreaviso === 1 ? 'mes' : 'meses'}, art. 232)</td><td class="num">${pesos(r.preaviso)}</td></tr>
+          <tr><td>Preaviso (${r.mesesPreaviso} ${r.mesesPreaviso === 1 ? 'mes' : 'meses'}, art. 231)</td><td class="num">${pesos(r.preaviso)}</td></tr>
           <tr><td>Integración del mes de despido (art. 233)</td><td class="num">${pesos(r.integracionMesDespido)}</td></tr>
           <tr><td>SAC proporcional (art. 123)</td><td class="num">${pesos(r.sacSobreIndemnizacion)}</td></tr>
           <tr class="total"><td>Total indemnizatorio</td><td class="num">${pesos(r.total)}</td></tr>
         </tbody>
       </table>`;
-  } catch (error) {
-    mostrarError('resultado-indemnizacion', error.message);
-  }
+  });
 });
 
 /* ---------------- arranque ---------------- */

@@ -40,4 +40,26 @@ public static class Sac
 
         return periodo.Ultimo.DayNumber - inicio.DayNumber + 1;
     }
+
+    /// <summary>
+    /// Días del semestre efectivamente trabajados: si el empleado entró después de que
+    /// empezara el semestre (o egresó antes de que terminara), el SAC se prorratea desde
+    /// su fecha, no desde el 1 de enero o el 1 de julio.
+    /// </summary>
+    public static int DiasTrabajadosDelSemestre(Periodo periodo, DateOnly ingreso, DateOnly? egreso = null)
+    {
+        var inicioSemestre = periodo.Semestre == 1
+            ? new DateOnly(periodo.Anio, 1, 1)
+            : new DateOnly(periodo.Anio, 7, 1);
+
+        var desde = ingreso > inicioSemestre ? ingreso : inicioSemestre;
+        var hasta = periodo.Ultimo;
+        if (egreso is { } salida && salida < hasta)
+            hasta = salida;
+
+        if (hasta < desde)
+            return 0;
+
+        return Math.Min(periodo.DiasDelSemestre, hasta.DayNumber - desde.DayNumber + 1);
+    }
 }

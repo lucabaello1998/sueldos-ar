@@ -449,12 +449,31 @@ def generar_html(
     pct_declaran = transparencia.get("declaran_salario_pct") or 0.0
     pct_plausible = transparencia.get("monto_plausible_pct") or 0.0
     busquedas = (sueldos.get("resumen_corrida") or {}).get("terminos_consultados") or 0
+    sin_datos = (sueldos.get("resumen_corrida") or {}).get("terminos_sin_datos") or []
     repetidos = transparencia.get("montos_repetidos") or []
-    ejemplos = (
-        ", ".join(f"<code>{formatear_numero(m)}</code>" for m in repetidos[:3])
-        if repetidos
-        else "<code>11.111</code>, <code>2.222</code>"
+    descartados_monto = max(0, declaran - plausibles)
+
+    # Si alguna búsqueda no devolvió nada, se dice: una corrida parcial no puede
+    # parecer completa.
+    nota_parcial = (
+        f" Además, {len(sin_datos)} de las {busquedas} búsquedas no devolvieron avisos "
+        "en esta corrida, así que la muestra es parcial."
+        if sin_datos
+        else ""
     )
+
+    # Los ejemplos salen solo de lo que se observó en esta corrida: si no hubo
+    # montos repetidos, no se inventan números de relleno.
+    if repetidos:
+        razon = (
+            "El resto repite valores de relleno como "
+            + ", ".join(f"<code>{formatear_numero(m)}</code>" for m in repetidos[:3])
+            + ". "
+        )
+    elif descartados_monto:
+        razon = "El resto no declara un monto comparable (rangos, “a convenir” o valores fuera de rango). "
+    else:
+        razon = ""
 
     tarjetas = [
         (
@@ -481,10 +500,11 @@ def generar_html(
 
     hallazgo = (
         '<p class="aviso"><strong>El dato que importa:</strong> de '
-        f"{formatear_numero(declaran)} ofertas que declaran un sueldo, solo "
+        f"{formatear_numero(declaran)} ofertas que declaran un sueldo, "
         f"{formatear_numero(plausibles)} publican un monto que se puede usar "
-        f"({pct_plausible:.0f}%). El resto repite valores de relleno como "
-        f"{ejemplos}. "
+        f"({pct_plausible:.0f}%). "
+        f"{razon}"
+        f"{nota_parcial} "
         "Por eso la tabla muestra pocos rubros con muestra suficiente: no es "
         "un error de scraping, es cómo se publica el salario en Argentina."
         "</p>"

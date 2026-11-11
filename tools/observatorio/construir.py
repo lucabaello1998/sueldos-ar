@@ -43,10 +43,17 @@ METODOLOGIA = (
 
 
 def _avisos_a_dicts(avisos: list[computrabajo.Aviso]) -> list[dict]:
-    """Convierte avisos crudos al formato interno con montos ya parseados."""
+    """Convierte avisos crudos al formato interno con montos ya parseados.
+
+    Los sueldos por hora no se pueden comparar con los mensuales: si se publican
+    como si fueran mensuales, un "200.000 la hora" entra como un sueldo bajo y
+    ensucia la mediana. Se descartan antes de llegar a la tabla.
+    """
     salida: list[dict] = []
     for aviso in avisos:
         monto = parsear_monto(aviso.salario_texto)
+        if monto is not None and monto.periodo != "mensual":
+            continue
         salida.append(
             {
                 "titulo": aviso.titulo,
@@ -197,6 +204,9 @@ def construir_sueldos(
         },
         "resumen_corrida": {
             "terminos_consultados": len(terminos),
+            "terminos_sin_datos": sorted(
+                {t["rubro"] for t in terminos if not por_rubro.get(t["rubro"])}
+            ),
             "avisos_recolectados": total_avisos_vistos,
             "avisos_utilizables": len(unicos_globales),
             "sin_salario_publicado": total_sin_salario,
@@ -228,12 +238,16 @@ def actualizar_historico(historico_previo: dict, sueldos: dict, fecha: str) -> d
     return {"corridas": corridas}
 
 
-def _leer_json(ruta: Path, defecto: dict) -> dict:
+def _leer_json(ruta: Path, defecto: dict, estricto: bool = False) -> dict:
     if not ruta.exists():
         return defecto
     try:
         return json.loads(ruta.read_text(encoding="utf-8"))
-    except json.JSONDecodeError:
+    except json.JSONDecodeError as error:
+        if estricto:
+            # Un histórico truncado no se reemplaza por uno vacío: se aborta y se
+            # conserva lo que había (o se recupera del backup de git).
+            raise ValueError(f"{ruta} está corrupto ({error.msg}). No se toca.") from error
         return defecto
 
 
@@ -274,10 +288,23 @@ def ejecutar(
     ruta_sueldos = datos_dir / "sueldos.json"
     ruta_historico = datos_dir / "historico.json"
 
+    # Una corrida sin datos no puede pisar el último snapshot bueno: se corta acá,
+    # antes de escribir nada, y main devuelve error.
+    if not sueldos["rubros"]:
+        return {
+            "sueldos": sueldos,
+            "historico": _leer_json(ruta_historico, {"corridas": []}),
+            "indec": {"disponible": False, "series": [], "motivo": "sin datos de avisos"},
+            "warnings": [*warnings, "No se recolectaron rubros: no se tocó ningún archivo."],
+            "archivos": [],
+        }
+
+    historico_previo = _leer_json(ruta_historico, {"corridas": []}, estricto=True)
+
     _escribir_json(ruta_sueldos, sueldos)
 
     historico = actualizar_historico(
-        _leer_json(ruta_historico, {"corridas": []}),
+        historico_previo,
         sueldos,
         generado.date().isoformat(),
     )

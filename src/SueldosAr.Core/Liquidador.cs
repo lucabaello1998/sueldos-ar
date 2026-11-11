@@ -24,7 +24,8 @@ public static class Liquidador
         var conceptos = new List<Concepto>();
 
         var diasMes = periodo.DiasDelMes;
-        var diasTrabajados = Math.Clamp(empleado.DiasTrabajados ?? diasMes, 0, diasMes);
+        var dias = DiasDelPeriodo(empleado, periodo);
+        var diasTrabajados = Math.Min(dias, diasMes);
         var proporcionDias = (decimal)diasTrabajados / diasMes;
 
         // --- Remunerativos ---
@@ -47,7 +48,8 @@ public static class Liquidador
             conceptos.Add(new Concepto("120", "Zona desfavorable", zona, TipoConcepto.Remunerativo,
                 $"Ley 19.587 / CCT: {parametros.ZonaDesfavorable:P0} sobre básico + antigüedad"));
 
-        var baseHora = basico + antiguedad;
+        // La zona desfavorable es remunerativa: también es base de horas extras.
+        var baseHora = basico + antiguedad + zona;
         var extras = HorasExtras.Calcular(baseHora, empleado.HorasExtrasAl50, empleado.HorasExtrasAl100,
             parametros.HorasMensuales);
         if (extras > 0)
@@ -82,7 +84,10 @@ public static class Liquidador
                 $"Afiliación gremial: {parametros.TasaSindicato:P0}"));
 
         // --- Ganancias ---
-        var ganancias = Ganancias.Calcular(bruto, aportes.Total, parametros, empleado.OtrasDeducciones);
+        // Las "otras deducciones" (adelantos) no son deducibles del impuesto: solo
+        // salen del neto. Pasarlas como deducción hacía que un adelanto bajara la
+        // retención y el empleado cobrara de más.
+        var ganancias = Ganancias.Calcular(bruto, aportes.Total, parametros);
         if (ganancias.Impuesto > 0)
             conceptos.Add(new Concepto("300", "Retención de ganancias", -ganancias.Impuesto, TipoConcepto.Descuento,
                 $"Art. 90 LIG — tramo {ganancias.AliquotaMarginal:P0} sobre base ${ganancias.BaseImponible:N2}"));
@@ -112,6 +117,10 @@ public static class Liquidador
             advertencias.Add(
                 $"Los parámetros cargados son de {parametros.VigenciaDesde:MM/yyyy} y el período es {periodo.Mes:00}/{periodo.Anio}: " +
                 "la escala de ganancias puede estar desactualizada. Cargá el JSON del período en Parametros/.");
+        else if (mesesDeAtraso < 0)
+            advertencias.Add(
+                $"Los parámetros cargados son de {parametros.VigenciaDesde:MM/yyyy}, posteriores al período {periodo.Mes:00}/{periodo.Anio}: " +
+                "se usan igual, pero los importes no son los que regían en ese período.");
 
         return new Recibo
         {
@@ -140,8 +149,37 @@ public static class Liquidador
         var recibo = Liquidar(empleado, periodo, parametros);
         var mejor = empleado.MejorRemuneracionSemestre ?? recibo.Bruto;
         var diasSemestre = periodo.DiasDelSemestre;
-        var dias = Math.Min(Sac.DiasTranscurridosDelSemestre(periodo), diasSemestre);
+
+        // Si entró (o egresó) a mitad del semestre, se prorratea desde esa fecha y no
+        // desde el 1 de enero / 1 de julio.
+        var dias = empleado.DiasTrabajados is { } pedidos
+            ? Math.Min(pedidos, diasSemestre)
+            : Sac.DiasTrabajadosDelSemestre(periodo, empleado.FechaIngreso, empleado.FechaEgreso);
 
         return Sac.Calcular(mejor, dias, diasSemestre);
+    }
+
+    /// <summary>
+    /// Días del período que corresponden al empleado: los que informó, o los del mes
+    /// recortados por la fecha de ingreso y la de egreso.
+    /// </summary>
+    private static int DiasDelPeriodo(Empleado empleado, Periodo periodo)
+    {
+        if (empleado.DiasTrabajados is { } informados)
+        {
+            if (informados < 0)
+                throw new ArgumentOutOfRangeException(nameof(empleado), "Los días trabajados no pueden ser negativos.");
+            return Math.Min(informados, periodo.DiasDelMes);
+        }
+
+        var desde = empleado.FechaIngreso > periodo.Primero ? empleado.FechaIngreso : periodo.Primero;
+        var hasta = periodo.Ultimo;
+        if (empleado.FechaEgreso is { } egreso && egreso < hasta)
+            hasta = egreso;
+
+        if (hasta < desde)
+            throw new ArgumentException("El empleado no trabajó ningún día del período.", nameof(empleado));
+
+        return hasta.DayNumber - desde.DayNumber + 1;
     }
 }

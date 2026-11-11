@@ -6,8 +6,8 @@ mínima para verlo funcionar.
 
 [![CI](https://github.com/lucabaello1998/sueldos-ar/actions/workflows/ci.yml/badge.svg)](https://github.com/lucabaello1998/sueldos-ar/actions/workflows/ci.yml)
 ![.NET](https://img.shields.io/badge/.NET-8.0-512BD4)
-![xUnit](https://img.shields.io/badge/xUnit-63%20tests-2ea44f)
-![pytest](https://img.shields.io/badge/pytest-92%20tests-2ea44f)
+![xUnit](https://img.shields.io/badge/xUnit-77%20tests-2ea44f)
+![pytest](https://img.shields.io/badge/pytest-101%20tests-2ea44f)
 ![Observatorio](https://img.shields.io/badge/observatorio-semanal-fbbf24)
 ![Licencia](https://img.shields.io/badge/licencia-MIT-blue)
 
@@ -101,7 +101,7 @@ Notas de despliegue:
 - El **observatorio** no se despliega: se publica solo. GitHub Actions corre el pipeline los lunes y
   commitea `docs/`; GitHub Pages sirve esa carpeta
   (*Settings → Pages → Deploy from a branch → main / docs*).
-- CI (`.github/workflows/ci.yml`) corre build con `-warnaserror`, los 63 tests xUnit, los 92 de
+- CI (`.github/workflows/ci.yml`) corre build con `-warnaserror`, los 77 tests xUnit, los 101 de
   pytest, un lint de Python y un smoke test de la API con `curl` antes de dar por buena una rama.
 
 ## Cómo está armado
@@ -117,14 +117,14 @@ src/
     Liquidador.cs          orquesta el recibo y arma los conceptos
   SueldosAr.Web/           Minimal API + una pantalla sin build step
 tests/
-  SueldosAr.Tests/         63 tests xUnit
+  SueldosAr.Tests/         77 tests xUnit
 tools/
   observatorio/            pipeline del observatorio (Python, stdlib)
     fuentes/               computrabajo.py, indec.py
     normalizar.py          filtros y agregados
     construir.py           corrida completa
     graficar.py            SVG a mano + HTML
-    tests/                 92 tests pytest
+    tests/                 101 tests pytest
 ```
 
 Tres decisiones que sostienen el diseño:
@@ -144,7 +144,7 @@ dotnet test
 ```
 
 ```
-Correctas! - Con error: 0, Superado: 63, Omitido: 0, Total: 63
+Correctas! - Con error: 0, Superado: 77, Omitido: 0, Total: 77
 ```
 
 Cubren, entre otras cosas:
@@ -152,11 +152,35 @@ Cubren, entre otras cosas:
 - **Aportes**: 11/3%, PAMI recién a los 70, sindicato solo si está afiliado, bruto 0.
 - **Ganancias**: escala marginal real (20.000.000 de base paga 3.867.187,50 recorriendo siete
   tramos), base negativa por deducciones, último tramo sin techo.
-- **SAC**: semestre completo, proporcional a los días, topeo de días, año bisiesto.
+- **SAC**: semestre completo, proporcional a los días y **desde la fecha de ingreso**, topeo de días,
+  año bisiesto.
 - **Vacaciones**: los cuatro tramos del art. 150, antigüedad al 31/12 anterior, días corridos.
-- **Indemnización**: fracción mayor a 3 meses, preaviso de 1 y 2 meses, integración del mes,
-  SAC proporcional, tope y piso.
-- **Recibo completo**: prorrateo, horas extras, zona desfavorable, costo del empleador.
+- **Indemnización**: fracción mayor a 3 meses (con días: 3 meses y 1 día ya cuenta), preaviso de 1
+  mes *hasta* 5 años y 2 si es mayor, integración del mes, SAC proporcional (la fracción de mes
+  cuenta si supera los 15 días), tope y piso.
+- **Recibo completo**: prorrateo por ingreso y egreso, horas extras (la zona desfavorable entra en
+  la base), costo del empleador, adelantos que no tocan la retención.
+
+## Reglas que el código aplica (y decisiones que conviene conocer)
+
+Estas son las que suelen aparecer mal en una planilla casera:
+
+| Caso | Qué hace | Base |
+|---|---|---|
+| Empleado que entró a mitad de mes | prorratea el básico por los días desde el ingreso | criterio de liquidación mensual |
+| Empleado que egresó | prorratea hasta la fecha de egreso; si egresó antes del período, es un error | ídem |
+| SAC de quien entró a mitad del semestre | se prorratea desde el ingreso, no desde el 1/1 o 1/7 | art. 121 LCT |
+| Adelanto o descuento informado | sale del **neto**, no de la base de ganancias | el adelanto no es deducción del impuesto |
+| Horas extras con zona desfavorable | la zona suma a la base del valor hora | la zona es remunerativa |
+| Antigüedad indemnizable menor a 3 meses | 0 años (el preaviso y la integración se pagan igual) | art. 245 LCT |
+| Preaviso con exactamente 5 años | 1 mes; 2 recién si es **mayor** a 5 | art. 231 LCT |
+| Mes de despido con 15 días o menos | no suma al SAC sobre la indemnización | art. 123 LCT |
+| Parámetros posteriores al período | se usan, con advertencia en el recibo | no se inventan valores de otro período |
+
+**Sobre la escala de ganancias:** los valores de `2024-07.json` son la **tabla mensual de retención**
+(la que publica ARCA para calcular el descuento del mes), no la escala anual del art. 90. Por eso se
+aplican contra el bruto mensual. Si algún día se cargan los valores anuales, hay que anualizar el
+bruto (13 sueldos) y dividir el impuesto por 12: son dos modelos distintos y el JSON no los distingue.
 
 ## Parámetros: cómo actualizarlos
 
@@ -249,7 +273,7 @@ Antes de calcular nada se descarta, y cada descarte se cuenta y se publica:
 python -m tools.observatorio.construir             # corrida completa (sale a la red)
 python -m tools.observatorio.construir --solo-html # rehace HTML y SVG desde docs/data
 python -m tools.observatorio.construir --offline   # sin red, contra los fixtures
-python -m pytest                                   # 92 tests
+python -m pytest                                   # 101 tests
 ```
 
 Solo biblioteca estándar de Python 3.11+: sin requests, sin pandas, sin build step. Los gráficos

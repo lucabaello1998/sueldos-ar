@@ -193,12 +193,15 @@ def hay_siguiente(html: str) -> bool:
 
 
 def leer_fixture(fixtures: Path, slug: str) -> str:
-    """Lee el HTML de ejemplo guardado para un término (modo offline)."""
+    """Lee el HTML de ejemplo guardado para un término (modo offline).
+
+    No hay fallback a otro término: usar el HTML de "desarrollador" para "QA"
+    publicaba veinte avisos ajenos como si fueran de QA. Si falta, se avisa.
+    """
     candidatos = [
         fixtures / f"computrabajo-{slug}.html",
         fixtures / f"computrabajo-{slug}-p1.html",
         fixtures / "computrabajo-listado.html",
-        fixtures / "computrabajo-desarrollador.html",
     ]
     for ruta in candidatos:
         if ruta.exists():

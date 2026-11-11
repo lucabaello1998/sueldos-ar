@@ -43,9 +43,9 @@ app.MapPost("/api/liquidacion", (PedidoLiquidacion pedido) =>
         var (empleado, periodo, parametros) = pedido.Armar();
         return Results.Ok(Proyectar(Liquidador.Liquidar(empleado, periodo, parametros)));
     }
-    catch (Exception ex) when (ex is ArgumentException or KeyNotFoundException)
+    catch (Exception ex) when (Validacion.EsErrorDelPedido(ex))
     {
-        return Results.BadRequest(new { error = ex.Message });
+        return Results.BadRequest(new { error = Validacion.Mensaje(ex) });
     }
 });
 
@@ -56,9 +56,9 @@ app.MapPost("/api/sac", (PedidoLiquidacion pedido) =>
         var (empleado, periodo, parametros) = pedido.Armar();
         return Results.Ok(Liquidador.LiquidarSac(empleado, periodo, parametros));
     }
-    catch (Exception ex) when (ex is ArgumentException or KeyNotFoundException)
+    catch (Exception ex) when (Validacion.EsErrorDelPedido(ex))
     {
-        return Results.BadRequest(new { error = ex.Message });
+        return Results.BadRequest(new { error = Validacion.Mensaje(ex) });
     }
 });
 
@@ -66,18 +66,19 @@ app.MapPost("/api/vacaciones", (PedidoVacaciones pedido) =>
 {
     try
     {
+        var ingreso = Validacion.Fecha(pedido.FechaIngreso, "Fecha de ingreso");
         var resultado = Vacaciones.Calcular(
-            DateOnly.Parse(pedido.FechaIngreso),
+            ingreso,
             pedido.Anio,
-            pedido.SueldoBasico,
+            Validacion.NoNegativo(pedido.SueldoBasico, "Sueldo básico"),
             pedido.DiasTomados,
             ParametrosRepositorio.ParaPeriodo(new Periodo(pedido.Anio, 1)).DivisorVacaciones);
 
         return Results.Ok(resultado);
     }
-    catch (Exception ex) when (ex is ArgumentException or FormatException)
+    catch (Exception ex) when (Validacion.EsErrorDelPedido(ex))
     {
-        return Results.BadRequest(new { error = ex.Message });
+        return Results.BadRequest(new { error = Validacion.Mensaje(ex) });
     }
 });
 
@@ -92,18 +93,20 @@ app.MapPost("/api/indemnizacion", (PedidoIndemnizacion pedido) =>
         var empleado = new Empleado
         {
             Nombre = pedido.Nombre ?? "Trabajador",
-            SueldoBasico = pedido.SueldoBasico,
-            FechaIngreso = DateOnly.Parse(pedido.FechaIngreso),
+            SueldoBasico = Validacion.NoNegativo(pedido.SueldoBasico, "Sueldo básico"),
+            FechaIngreso = Validacion.Fecha(pedido.FechaIngreso, "Fecha de ingreso"),
             Edad = pedido.Edad,
             MejorRemuneracionSemestre = pedido.MejorRemuneracion
         };
 
-        var resultado = Indemnizacion.Calcular(empleado, DateOnly.Parse(pedido.FechaDespido), parametros, pedido.MejorRemuneracion);
+        var despido = Validacion.Fecha(pedido.FechaDespido, "Fecha de despido");
+        var mejor = pedido.MejorRemuneracion is { } m ? Validacion.NoNegativo(m, "Mejor remuneración") : (decimal?)null;
+        var resultado = Indemnizacion.Calcular(empleado, despido, parametros, mejor);
         return Results.Ok(resultado);
     }
-    catch (Exception ex) when (ex is ArgumentException or FormatException or KeyNotFoundException)
+    catch (Exception ex) when (Validacion.EsErrorDelPedido(ex))
     {
-        return Results.BadRequest(new { error = ex.Message });
+        return Results.BadRequest(new { error = Validacion.Mensaje(ex) });
     }
 });
 
@@ -165,16 +168,18 @@ public sealed record PedidoLiquidacion
         var empleado = new Empleado
         {
             Nombre = Nombre ?? "Trabajador",
-            SueldoBasico = SueldoBasico,
-            FechaIngreso = DateOnly.Parse(FechaIngreso),
+            SueldoBasico = Validacion.NoNegativo(SueldoBasico, "Sueldo básico"),
+            FechaIngreso = Validacion.Fecha(FechaIngreso, "Fecha de ingreso"),
             Edad = Edad,
             AfiliadoSindicato = AfiliadoSindicato,
             ZonaDesfavorable = ZonaDesfavorable,
-            HorasExtrasAl50 = HorasExtrasAl50,
-            HorasExtrasAl100 = HorasExtrasAl100,
+            HorasExtrasAl50 = Validacion.NoNegativo(HorasExtrasAl50, "Horas extras al 50%"),
+            HorasExtrasAl100 = Validacion.NoNegativo(HorasExtrasAl100, "Horas extras al 100%"),
             DiasTrabajados = DiasTrabajados,
-            OtrasDeducciones = OtrasDeducciones,
-            MejorRemuneracionSemestre = MejorRemuneracionSemestre
+            OtrasDeducciones = Validacion.NoNegativo(OtrasDeducciones, "Otras deducciones"),
+            MejorRemuneracionSemestre = MejorRemuneracionSemestre is { } mejor
+                ? Validacion.NoNegativo(mejor, "Mejor remuneración")
+                : null
         };
 
         return (empleado, periodo, parametros);
@@ -198,4 +203,25 @@ public sealed record PedidoIndemnizacion
     public decimal? MejorRemuneracion { get; init; }
     public int? Edad { get; init; }
     public string? ParametrosId { get; init; }
+}
+
+// --- validación de entrada -----------------------------------------------------
+// Un dato inválido es un 400 con el motivo, nunca un 500 con el stack: el panel
+// muestra ese mensaje y quien prueba la API tiene que poder entender qué mandó mal.
+internal static class Validacion
+{
+    public static bool EsErrorDelPedido(Exception ex) =>
+        ex is ArgumentException or KeyNotFoundException or FormatException or OverflowException;
+
+    public static string Mensaje(Exception ex) => ex is OverflowException
+        ? "Alguno de los importes es demasiado grande para calcularlo."
+        : ex.Message;
+
+    public static DateOnly Fecha(string? valor, string campo) =>
+        DateOnly.TryParse(valor, CultureInfo.InvariantCulture, out var fecha)
+            ? fecha
+            : throw new ArgumentException($"{campo}: \"{valor}\" no es una fecha válida (se espera AAAA-MM-DD).");
+
+    public static decimal NoNegativo(decimal valor, string campo) =>
+        valor >= 0 ? valor : throw new ArgumentException($"{campo} no puede ser negativo.");
 }

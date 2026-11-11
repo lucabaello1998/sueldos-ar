@@ -25,8 +25,12 @@ public static class HorasExtras
     {
         if (horasAl50 < 0 || horasAl100 < 0)
             throw new ArgumentOutOfRangeException(nameof(horasAl50), "Las horas extras no pueden ser negativas.");
+        if (horasMensuales <= 0)
+            throw new ArgumentOutOfRangeException(nameof(horasMensuales), "Las horas mensuales tienen que ser mayores a cero.");
 
-        var valorHora = sueldoMensual / horasMensuales;
+        // Se usa el mismo valor hora redondeado que muestra el recibo: si no, el
+        // detalle dice $5.000,01 y la cuenta usó 5.000,005.
+        var valorHora = ValorHora(sueldoMensual, horasMensuales);
 
         return Pesos.Redondear(valorHora * horasAl50 * 1.5m + valorHora * horasAl100 * 2m);
     }
