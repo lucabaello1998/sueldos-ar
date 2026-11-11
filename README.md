@@ -6,7 +6,7 @@ mínima para verlo funcionar.
 
 [![CI](https://github.com/lucabaello1998/sueldos-ar/actions/workflows/ci.yml/badge.svg)](https://github.com/lucabaello1998/sueldos-ar/actions/workflows/ci.yml)
 ![.NET](https://img.shields.io/badge/.NET-8.0-512BD4)
-![xUnit](https://img.shields.io/badge/xUnit-61%20tests-2ea44f)
+![xUnit](https://img.shields.io/badge/xUnit-63%20tests-2ea44f)
 ![pytest](https://img.shields.io/badge/pytest-92%20tests-2ea44f)
 ![Observatorio](https://img.shields.io/badge/observatorio-semanal-fbbf24)
 ![Licencia](https://img.shields.io/badge/licencia-MIT-blue)
@@ -51,9 +51,12 @@ Una API y una pantalla que liquidan un mes completo y explican **cada peso**:
 
 ## Correrlo
 
-Necesitás el SDK de .NET 8.
+Necesitás el **SDK de .NET 8** (`dotnet --version`). El observatorio, aparte, pide **Python 3.11+**,
+sin dependencias.
 
 ```bash
+git clone https://github.com/lucabaello1998/sueldos-ar.git
+cd sueldos-ar
 dotnet run --project src/SueldosAr.Web --urls http://localhost:8095
 ```
 
@@ -74,6 +77,33 @@ curl -X POST http://localhost:8095/api/liquidacion \
 | `GET /api/parametros` | Juegos de parámetros cargados |
 | `GET /api/salud` | Estado del servicio |
 
+## Despliegue
+
+La app es un contenedor o un `dotnet publish`, sin base de datos ni configuración externa.
+
+```bash
+# imagen de producción (multi-stage: SDK para compilar, runtime para correr)
+docker build -t sueldos-ar .
+docker run --rm -p 8080:8080 sueldos-ar
+# → http://localhost:8080
+
+# o sin Docker
+dotnet publish src/SueldosAr.Web -c Release -o out
+dotnet out/SueldosAr.Web.dll --urls http://0.0.0.0:8080
+```
+
+Notas de despliegue:
+
+- El contenedor escucha en **8080** (`ASPNETCORE_URLS` ya está en el Dockerfile) y expone health
+  check en `/api/salud`: usalo para el readiness del orquestador.
+- No necesita secretos ni variables de entorno. Los parámetros legales van embebidos en el assembly.
+- Si lo publicás detrás de un proxy, el HTML y la API son estáticos + JSON: no hay estado en memoria.
+- El **observatorio** no se despliega: se publica solo. GitHub Actions corre el pipeline los lunes y
+  commitea `docs/`; GitHub Pages sirve esa carpeta
+  (*Settings → Pages → Deploy from a branch → main / docs*).
+- CI (`.github/workflows/ci.yml`) corre build con `-warnaserror`, los 63 tests xUnit, los 92 de
+  pytest, un lint de Python y un smoke test de la API con `curl` antes de dar por buena una rama.
+
 ## Cómo está armado
 
 ```
@@ -87,7 +117,7 @@ src/
     Liquidador.cs          orquesta el recibo y arma los conceptos
   SueldosAr.Web/           Minimal API + una pantalla sin build step
 tests/
-  SueldosAr.Tests/         61 tests xUnit
+  SueldosAr.Tests/         63 tests xUnit
 tools/
   observatorio/            pipeline del observatorio (Python, stdlib)
     fuentes/               computrabajo.py, indec.py
@@ -114,7 +144,7 @@ dotnet test
 ```
 
 ```
-Correctas! - Con error: 0, Superado: 61, Omitido: 0, Total: 61
+Correctas! - Con error: 0, Superado: 63, Omitido: 0, Total: 63
 ```
 
 Cubren, entre otras cosas:
@@ -152,7 +182,17 @@ Se embebe solo (el `.csproj` incluye `Parametros/*.json`) y aparece en `GET /api
 `ParametrosRepositorio.ParaPeriodo()` elige el último juego cuya vigencia ya empezó.
 
 **El repo no inventa valores fiscales.** Si el JSON dice `estimado: true`, el recibo lo advierte
-en pantalla.
+en pantalla. Y si el período que estás liquidando es posterior al juego de parámetros elegido, el
+recibo también avisa:
+
+```
+Los parámetros cargados son de 07/2024 y el período es 03/2026: la escala de ganancias puede
+estar desactualizada. Cargá el JSON del período en Parametros/.
+```
+
+Es a propósito: los aportes (11%, 3%) no cambian todos los meses, pero la escala de ganancias se
+actualiza por IPC. Preferimos decir "esto puede estar viejo" antes que mostrar un número con
+precisión falsa.
 
 ## Límites
 

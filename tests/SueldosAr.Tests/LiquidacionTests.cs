@@ -129,4 +129,20 @@ public class LiquidacionTests
 
         Assert.Equal(1_100_000m, sac.MejorRemuneracion);
     }
+
+    [Fact]
+    public void Avisa_cuando_los_parametros_son_anteriores_al_periodo()
+    {
+        var r = Liquidador.Liquidar(Fixture.EmpleadoBase(), new Periodo(2026, 3), Fixture.Parametros2024);
+
+        Assert.Contains(r.Advertencias, a => a.Contains("desactualizada") && a.Contains("07/2024"));
+    }
+
+    [Fact]
+    public void No_avisa_cuando_el_periodo_coincide_con_los_parametros()
+    {
+        var r = Liquidador.Liquidar(Fixture.EmpleadoBase(), new Periodo(2024, 7), Fixture.Parametros2024);
+
+        Assert.DoesNotContain(r.Advertencias, a => a.Contains("desactualizada"));
+    }
 }

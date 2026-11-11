@@ -105,6 +105,14 @@ public static class Liquidador
         if (parametros.Estimado)
             advertencias.Add($"Los parámetros {parametros.Id} son una actualización estimada: revisá la escala vigente antes de usarlos en producción.");
 
+        // La ley se actualiza por IPC: si el período es posterior al juego de parámetros, la escala
+        // de ganancias puede estar vieja. No se inventan valores: se avisa.
+        var mesesDeAtraso = (periodo.Anio - parametros.VigenciaDesde.Year) * 12 + periodo.Mes - parametros.VigenciaDesde.Month;
+        if (mesesDeAtraso > 0)
+            advertencias.Add(
+                $"Los parámetros cargados son de {parametros.VigenciaDesde:MM/yyyy} y el período es {periodo.Mes:00}/{periodo.Anio}: " +
+                "la escala de ganancias puede estar desactualizada. Cargá el JSON del período en Parametros/.");
+
         return new Recibo
         {
             Empleado = empleado.Nombre,
