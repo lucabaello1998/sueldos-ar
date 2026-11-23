@@ -1,5 +1,5 @@
 {
-  "generado": "2026-11-16T19:24:15Z",
+  "generado": "2026-11-23T20:58:04Z",
   "fuente": "Computrabajo Argentina (avisos con salario publicado)",
   "url_fuente": "https://ar.computrabajo.com/",
   "metodologia": "Mediana de salarios publicados en avisos de Computrabajo Argentina, agrupados por rubro tech. Son avisos de empresas, no encuestas ni liquidaciones reales: solo reflejan a quienes declaran el monto, y un rango se resume con su punto medio. Los rubros con menos de 3 avisos quedan sin mediana y los de 3 o 4 se marcan como muestra chica.",
@@ -7,22 +7,29 @@
     {
       "id": "devops",
       "nombre": "DevOps / Infra",
-      "n": 3,
-      "ofertas": 94,
-      "con_salario": 22,
-      "mediana": 2000000,
-      "p25": 1814095,
+      "n": 4,
+      "ofertas": 95,
+      "con_salario": 24,
+      "mediana": 2200000,
+      "p25": 1907048,
       "p75": 2500000,
       "min": 1628190,
-      "max": 3000000,
+      "max": 2800000,
       "suficiente": false,
       "avisos": [
         {
-          "titulo": "Ingeniero/a para Jefe de Turno en gran empresa en expansión",
-          "empresa": "DOCTAS",
-          "salario_min": 3000000,
-          "salario_max": 3000000,
-          "url": "https://ar.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-ingenieroa-para-jefe-de-turno-en-gran-empresa-en-expansion-turnos-rotativos-semanales-en-cordoba-D9F604E500EE314761373E686DCF3405"
+          "titulo": "Analista de Planta de Efluentes",
+          "empresa": "PEPSICO INTERNACIONAL MEXICO",
+          "salario_min": 2400000,
+          "salario_max": 2400000,
+          "url": "https://ar.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-analista-de-planta-de-efluentes-planta-industrial-mar-del-plata-en-mar-del-plata-F2830D1134FEC4EC61373E686DCF3405"
+        },
+        {
+          "titulo": "Tecnico en redes",
+          "empresa": "",
+          "salario_min": 2800000,
+          "salario_max": 2800000,
+          "url": "https://ar.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-tecnico-en-redes-soporte-it-y-redes-en-neuquen-65D8B70A625A92A361373E686DCF3405"
         },
         {
           "titulo": "Vigilador General Santa Fe Capital",
@@ -41,18 +48,111 @@
       ]
     },
     {
+      "id": "qa",
+      "nombre": "QA / Testing",
+      "n": 4,
+      "ofertas": 65,
+      "con_salario": 19,
+      "mediana": 1850000,
+      "p25": 1700000,
+      "p75": 2000000,
+      "min": 1700000,
+      "max": 2000000,
+      "suficiente": false,
+      "avisos": [
+        {
+          "titulo": "Departamento de calidad en alimentos",
+          "empresa": "Yin Yang argentina",
+          "salario_min": 2000000,
+          "salario_max": 2000000,
+          "url": "https://ar.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-departamento-de-calidad-en-alimentos-en-remedios-de-escalada-25134B4495C5839D61373E686DCF3405"
+        },
+        {
+          "titulo": "Inspectores/as de Calidad",
+          "empresa": "Cecilia Menta",
+          "salario_min": 1700000,
+          "salario_max": 1700000,
+          "url": "https://ar.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-inspectoresas-de-calidad-importante-empresa-de-servicios-de-transporte-en-cordoba-FBE15563B1D07EBE61373E686DCF3405"
+        },
+        {
+          "titulo": "Responsable de Faena y Calidad – Planta Avícola",
+          "empresa": "",
+          "salario_min": 2000000,
+          "salario_max": 2000000,
+          "url": "https://ar.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-responsable-de-faena-y-calidad-planta-avicola-en-navarro-9446811EAA12CD4061373E686DCF3405"
+        },
+        {
+          "titulo": "Responsable del área de calidad y BPM",
+          "empresa": "Tres Pasos",
+          "salario_min": 1700000,
+          "salario_max": 1700000,
+          "url": "https://ar.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-responsable-del-area-de-calidad-y-bpm-en-tigre-F90CCE63D4819C7D61373E686DCF3405"
+        }
+      ]
+    },
+    {
+      "id": "funcional",
+      "nombre": "Análisis funcional",
+      "n": 4,
+      "ofertas": 106,
+      "con_salario": 30,
+      "mediana": 1491469,
+      "p25": 440512,
+      "p75": 2750000,
+      "min": 313233,
+      "max": 3500000,
+      "suficiente": false,
+      "avisos": [
+        {
+          "titulo": "Analista Funcional Ssr",
+          "empresa": "CapitalHumano",
+          "salario_min": 2500000,
+          "salario_max": 2500000,
+          "url": "https://ar.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-analista-funcional-ssr-en-palermo-6FC2EF3A12310DEA61373E686DCF3405"
+        },
+        {
+          "titulo": "Desarrollador Power Buillder Appeon",
+          "empresa": "Niztech",
+          "salario_min": 3500000,
+          "salario_max": 3500000,
+          "url": "https://ar.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-desarrollador-power-buillder-appeon-soporte-y-mantenimiento-evolutivo-en-recoleta-DA883BB113A5F48D61373E686DCF3405"
+        },
+        {
+          "titulo": "Ref. 21429: Analista Funcional de Operaciones / Híbrido Olivos Prov. Bs As",
+          "empresa": "ADN - Recursos Humanos",
+          "salario_min": 313233,
+          "salario_max": 313233,
+          "url": "https://ar.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-ref-21429-analista-funcional-de-operaciones-hibrido-olivos-prov-bs-as-en-olivos-02ADEC858C8E217261373E686DCF3405"
+        },
+        {
+          "titulo": "Ref. 21445: Consultor Funcional Odoo / Híbrido Núñez CABA",
+          "empresa": "ADN - Recursos Humanos",
+          "salario_min": 482938,
+          "salario_max": 482938,
+          "url": "https://ar.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-ref-21445-consultor-funcional-odoo-hibrido-nunez-caba-en-nunez-2684C3A8152EC7E961373E686DCF3405"
+        }
+      ]
+    },
+    {
       "id": "soporte",
       "nombre": "Soporte técnico",
-      "n": 5,
+      "n": 7,
       "ofertas": 60,
-      "con_salario": 10,
-      "mediana": 1800000,
-      "p25": 1400000,
-      "p75": 2000000,
-      "min": 1000000,
+      "con_salario": 12,
+      "mediana": 1400000,
+      "p25": 1100000,
+      "p75": 1900000,
+      "min": 350000,
       "max": 2800000,
       "suficiente": true,
       "avisos": [
+        {
+          "titulo": "Soporte técnico Presencial",
+          "empresa": "SIP Soluciones Informaticas Personalizadas",
+          "salario_min": 1200000,
+          "salario_max": 1200000,
+          "url": "https://ar.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-soporte-tecnico-presencial-en-san-justo-4A840FC087CB433161373E686DCF3405"
+        },
         {
           "titulo": "Tecnico de Soporte y Mesa de Ayuda",
           "empresa": "",
@@ -87,35 +187,35 @@
           "salario_min": 1000000,
           "salario_max": 1000000,
           "url": "https://ar.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-analista-soporte-tecnico-con-experiencia-en-rosario-AF2A00C2548820A661373E686DCF3405"
+        },
+        {
+          "titulo": "técnico soporte",
+          "empresa": "Starligh S.A.",
+          "salario_min": 350000,
+          "salario_max": 350000,
+          "url": "https://ar.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-tecnico-soporte-practica-profesionalizante-ppp-en-cordoba-B5421ECF40FD9F7861373E686DCF3405"
         }
       ]
     },
     {
       "id": "datos",
       "nombre": "Datos",
-      "n": 5,
-      "ofertas": 114,
-      "con_salario": 25,
-      "mediana": 1500000,
-      "p25": 1000000,
-      "p75": 1800000,
-      "min": 700000,
-      "max": 2200000,
+      "n": 8,
+      "ofertas": 116,
+      "con_salario": 32,
+      "mediana": 1272072,
+      "p25": 850000,
+      "p75": 1900000,
+      "min": 313233,
+      "max": 2400000,
       "suficiente": true,
       "avisos": [
         {
-          "titulo": "Analista BI Retail",
-          "empresa": "",
-          "salario_min": 1500000,
-          "salario_max": 1500000,
-          "url": "https://ar.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-analista-bi-retail-en-vicente-lopez-26668B129C0DA76861373E686DCF3405"
-        },
-        {
-          "titulo": "Analista de Performance – Business Intelligence",
-          "empresa": "AMMAZY GROUP",
-          "salario_min": 1000000,
-          "salario_max": 1000000,
-          "url": "https://ar.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-analista-de-performance-business-intelligence-en-cordoba-0C7C6120941F1DA761373E686DCF3405"
+          "titulo": "Analista de Planta de Efluentes",
+          "empresa": "PEPSICO INTERNACIONAL MEXICO",
+          "salario_min": 2400000,
+          "salario_max": 2400000,
+          "url": "https://ar.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-analista-de-planta-de-efluentes-planta-industrial-mar-del-plata-en-mar-del-plata-F2830D1134FEC4EC61373E686DCF3405"
         },
         {
           "titulo": "Analista de compras Junior Zona Saavedra",
@@ -137,106 +237,13 @@
           "salario_min": 2200000,
           "salario_max": 2200000,
           "url": "https://ar.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-ejecutivo-de-cuentas-kam-en-quilmes-5718E59C32F7DE7461373E686DCF3405"
-        }
-      ]
-    },
-    {
-      "id": "qa",
-      "nombre": "QA / Testing",
-      "n": 5,
-      "ofertas": 67,
-      "con_salario": 16,
-      "mediana": 1400000,
-      "p25": 1200000,
-      "p75": 1800000,
-      "min": 1200000,
-      "max": 2000000,
-      "suficiente": true,
-      "avisos": [
-        {
-          "titulo": "Analista de Calidad",
-          "empresa": "",
-          "salario_min": 1200000,
-          "salario_max": 1200000,
-          "url": "https://ar.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-analista-de-calidad-campana-retencion-en-parque-patricios-7A52111E0C932FE061373E686DCF3405"
         },
         {
-          "titulo": "Auditor Interno de Calidad",
-          "empresa": "",
-          "salario_min": 1800000,
-          "salario_max": 1800000,
-          "url": "https://ar.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-auditor-interno-de-calidad-en-lanus-F47AD872DE545AD961373E686DCF3405"
-        },
-        {
-          "titulo": "Auditor/a de Calidad – Contact Center",
-          "empresa": "Solventa",
-          "salario_min": 1400000,
-          "salario_max": 1400000,
-          "url": "https://ar.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-auditora-de-calidad-contact-center-en-retiro-89C4D5BBAB73F49A61373E686DCF3405"
-        },
-        {
-          "titulo": "Departamento de calidad en alimentos",
-          "empresa": "Yin Yang argentina",
-          "salario_min": 2000000,
-          "salario_max": 2000000,
-          "url": "https://ar.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-departamento-de-calidad-en-alimentos-en-remedios-de-escalada-25134B4495C5839D61373E686DCF3405"
-        },
-        {
-          "titulo": "Tecnico quimico con experiencia como Analista de calidad de procesos",
-          "empresa": "Pullmen RRHH",
-          "salario_min": 1200000,
-          "salario_max": 1200000,
-          "url": "https://ar.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-tecnico-quimico-con-experiencia-como-analista-de-calidad-de-procesos-turno-6x2-parque-industrial-de-pilar-en-pilar-89FDCF665BDF281A61373E686DCF3405"
-        }
-      ]
-    },
-    {
-      "id": "funcional",
-      "nombre": "Análisis funcional",
-      "n": 6,
-      "ofertas": 111,
-      "con_salario": 34,
-      "mediana": 800000,
-      "p25": 600000,
-      "p75": 1000000,
-      "min": 313233,
-      "max": 1500000,
-      "suficiente": true,
-      "avisos": [
-        {
-          "titulo": "Analista BI Retail",
-          "empresa": "",
-          "salario_min": 1500000,
-          "salario_max": 1500000,
-          "url": "https://ar.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-analista-bi-retail-en-vicente-lopez-26668B129C0DA76861373E686DCF3405"
-        },
-        {
-          "titulo": "Analista de Comercio Exterior",
-          "empresa": "CCM SA",
-          "salario_min": 1000000,
-          "salario_max": 1000000,
-          "url": "https://ar.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-analista-de-comercio-exterior-part-time-en-villa-gdor-galvez-55708A69C69370DF61373E686DCF3405"
-        },
-        {
-          "titulo": "Analista de Performance – Business Intelligence",
-          "empresa": "AMMAZY GROUP",
-          "salario_min": 1000000,
-          "salario_max": 1000000,
-          "url": "https://ar.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-analista-de-performance-business-intelligence-en-cordoba-0C7C6120941F1DA761373E686DCF3405"
-        },
-        {
-          "titulo": "Consultor SAP CO Senior",
-          "empresa": "C&S informática s.a.",
-          "salario_min": 600000,
-          "salario_max": 600000,
-          "url": "https://ar.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-consultor-sap-co-senior-en-san-nicolas-93455A90C34C39E161373E686DCF3405"
-        },
-        {
-          "titulo": "Consultor SAP SD",
-          "empresa": "C&S informática s.a.",
-          "salario_min": 600000,
-          "salario_max": 600000,
-          "url": "https://ar.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-consultor-sap-sd-bajo-relacion-de-dependencia-en-san-nicolas-69372D68EE5BDAAE61373E686DCF3405"
+          "titulo": "Ref. 20831: Implementador de sistema / Líder de proyectos / Don Torcuato",
+          "empresa": "ADN - Recursos Humanos",
+          "salario_min": 1244145,
+          "salario_max": 1244145,
+          "url": "https://ar.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-ref-20831-implementador-de-sistema-lider-de-proyectos-don-torcuato-tigre-prov-bs-as--2-vacantes-en-tigre-E58142FB5A6E58F161373E686DCF3405"
         },
         {
           "titulo": "Ref. 21429: Analista Funcional de Operaciones / Híbrido Olivos Prov. Bs As",
@@ -244,20 +251,34 @@
           "salario_min": 313233,
           "salario_max": 313233,
           "url": "https://ar.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-ref-21429-analista-funcional-de-operaciones-hibrido-olivos-prov-bs-as-en-olivos-02ADEC858C8E217261373E686DCF3405"
+        },
+        {
+          "titulo": "Telemarketer",
+          "empresa": "PL Comms",
+          "salario_min": 900000,
+          "salario_max": 900000,
+          "url": "https://ar.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-telemarketer-asesor-telefonico-parttime-hasta-1800000-en-boulogne-D365B3C9FBCC9F1C61373E686DCF3405"
+        },
+        {
+          "titulo": "Técnico reparación de celulares",
+          "empresa": "GOFIX",
+          "salario_min": 1300000,
+          "salario_max": 1300000,
+          "url": "https://ar.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-tecnico-reparacion-de-celulares-vicente-lopez-en-vicente-lopez-1F9A73FDC1D44CC161373E686DCF3405"
         }
       ]
     },
     {
       "id": "backend",
       "nombre": "Backend",
-      "n": 2,
-      "ofertas": 116,
-      "con_salario": 43,
-      "mediana": null,
-      "p25": null,
-      "p75": null,
+      "n": 3,
+      "ofertas": 119,
+      "con_salario": 47,
+      "mediana": 750000,
+      "p25": 475000,
+      "p75": 997072,
       "min": 200000,
-      "max": 3700000,
+      "max": 1244145,
       "suficiente": false,
       "avisos": [
         {
@@ -268,25 +289,32 @@
           "url": "https://ar.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-desarrollador-backend-net-ssr-en-cordoba-881481796EACFB8561373E686DCF3405"
         },
         {
-          "titulo": "Lider Tecnico",
-          "empresa": "ESolutions SA",
-          "salario_min": 3700000,
-          "salario_max": 3700000,
-          "url": "https://ar.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-lider-tecnico-en-cordoba-8985EADB18ADC5DB61373E686DCF3405"
+          "titulo": "Ref. 20831: Implementador de sistema / Líder de proyectos / Don Torcuato",
+          "empresa": "ADN - Recursos Humanos",
+          "salario_min": 1244145,
+          "salario_max": 1244145,
+          "url": "https://ar.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-ref-20831-implementador-de-sistema-lider-de-proyectos-don-torcuato-tigre-prov-bs-as--2-vacantes-en-tigre-E58142FB5A6E58F161373E686DCF3405"
+        },
+        {
+          "titulo": "Técnico electrónico Jr",
+          "empresa": "Pullmen RRHH",
+          "salario_min": 750000,
+          "salario_max": 750000,
+          "url": "https://ar.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-tecnico-electronico-jr-zescobar-en-escobar-D661A2DBDAE71EA761373E686DCF3405"
         }
       ]
     },
     {
       "id": "desarrollo",
       "nombre": "Desarrollo (general)",
-      "n": 1,
-      "ofertas": 61,
-      "con_salario": 19,
+      "n": 2,
+      "ofertas": 60,
+      "con_salario": 15,
       "mediana": null,
       "p25": null,
       "p75": null,
       "min": 200000,
-      "max": 200000,
+      "max": 2000000,
       "suficiente": false,
       "avisos": [
         {
@@ -295,6 +323,13 @@
           "salario_min": 200000,
           "salario_max": 200000,
           "url": "https://ar.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-desarrollador-backend-net-ssr-en-cordoba-881481796EACFB8561373E686DCF3405"
+        },
+        {
+          "titulo": "Desarrollador de Negocios",
+          "empresa": "FLASHBOX DELIVERY S.R.L",
+          "salario_min": 2000000,
+          "salario_max": 2000000,
+          "url": "https://ar.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-desarrollador-de-negocios-en-boca-79613A94C5A6109E61373E686DCF3405"
         }
       ]
     },
@@ -302,8 +337,8 @@
       "id": "frontend",
       "nombre": "Frontend",
       "n": 1,
-      "ofertas": 27,
-      "con_salario": 8,
+      "ofertas": 23,
+      "con_salario": 5,
       "mediana": null,
       "p25": null,
       "p75": null,
@@ -335,32 +370,30 @@
       "avisos": []
     }
   ],
-  "mediana_general": 1400000,
-  "n_general": 25,
+  "mediana_general": 1700000,
+  "n_general": 27,
   "descartados": {
-    "fuera_de_rango": 5,
-    "centinela": 125,
+    "fuera_de_rango": 8,
+    "centinela": 119,
     "spam": 0,
-    "no_tech": 21,
-    "duplicado": 4,
-    "atipico": 1
+    "no_tech": 27,
+    "duplicado": 2,
+    "atipico": 2
   },
   "transparencia": {
-    "ofertas_unicas": 524,
-    "declaran_salario": 150,
-    "declaran_salario_pct": 28.6,
-    "monto_plausible": 30,
-    "monto_plausible_pct": 20.0,
-    "montos_repetidos": [
-      482938
-    ]
+    "ofertas_unicas": 521,
+    "declaran_salario": 159,
+    "declaran_salario_pct": 30.5,
+    "monto_plausible": 31,
+    "monto_plausible_pct": 19.5,
+    "montos_repetidos": []
   },
   "resumen_corrida": {
     "terminos_consultados": 18,
     "terminos_sin_datos": [],
-    "avisos_recolectados": 669,
-    "avisos_utilizables": 25,
-    "sin_salario_publicado": 485,
+    "avisos_recolectados": 663,
+    "avisos_utilizables": 27,
+    "sin_salario_publicado": 472,
     "filtros": {
       "minimo_pesos": 150000,
       "maximo_pesos": 20000000,
